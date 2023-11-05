@@ -19,18 +19,20 @@ public class Room {
     private Coordinate bottomRight;
     private Coordinate topLeft;
     private Coordinate topRight;
+    private boolean drewRoom = false;
 
-    public Room(Random random, int maxRoomX, int maxRoomY, TETile[][] world) {
+    public Room(Random random, TETile[][] world) {
         length = RandomUtils.uniform(random, MIN_ROOM_LENGTH, MAX_ROOM_LENGTH);
         height = RandomUtils.uniform(random, MIN_ROOM_HEIGHT, MAX_ROOM_HEIGHT);
-        int bottomLeftX = RandomUtils.uniform(random, maxRoomX);
-        int bottomLeftY = RandomUtils.uniform(random, maxRoomY);
+        int bottomLeftX = RandomUtils.uniform(random, MAX_ROOM_LENGTH);
+        int bottomLeftY = RandomUtils.uniform(random, MAX_ROOM_HEIGHT);
         bottomLeft = new Coordinate(bottomLeftX, bottomLeftY);
         bottomRight = new Coordinate(bottomLeftX + length, bottomLeftY);
         topLeft = new Coordinate(bottomLeftX, bottomLeftY + height);
         topRight = new Coordinate(bottomLeftX + length, bottomLeftY + height);
         if (!overlaps(world)) {
             drawRoom(world);
+            drewRoom = true;
         }
     }
 
@@ -64,4 +66,7 @@ public class Room {
                 || y == bottomLeft.getY() || y == topRight.getY();
     }
 
+    public boolean drewRoom() {
+        return drewRoom;
+    }
 }
