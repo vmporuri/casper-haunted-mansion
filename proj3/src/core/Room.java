@@ -8,8 +8,8 @@ import java.util.Random;
 
 public class Room {
 
-    private static final int MIN_ROOM_LENGTH = 3;
-    private static final int MIN_ROOM_HEIGHT = 3;
+    private static final int MIN_ROOM_LENGTH = 5;
+    private static final int MIN_ROOM_HEIGHT = 5;
     private static final int MAX_ROOM_LENGTH = 10;
     private static final int MAX_ROOM_HEIGHT = 10;
 
@@ -30,13 +30,14 @@ public class Room {
         topLeft = new Coordinate(bottomLeftX, bottomLeftY + height);
         topRight = new Coordinate(bottomLeftX + length, bottomLeftY + height);
         if (!overlaps(world)) {
-            drawRoom();
+            drawRoom(world);
         }
     }
 
+    /** Checks if the new room overlaps with any old rooms. */
     public boolean overlaps(TETile[][] world) {
-        for (int i = 0; i < length; i++) {
-            for (int j = 0; j < height; j++) {
+        for (int i = bottomLeft.getX(); i <= bottomRight.getX(); i++) {
+            for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
                 if (world[i][j] != Tileset.NOTHING) {
                     return true;
                 }
@@ -45,8 +46,22 @@ public class Room {
         return false;
     }
 
-    public void drawRoom() {
+    /** Draws the room on the grid. */
+    public void drawRoom(TETile[][] world) {
+        for (int i = bottomLeft.getX(); i <= bottomRight.getX(); i++) {
+            for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
+                if (isEdge(i, j)) {
+                    world[i][j] = Tileset.WALL;
+                } else {
+                    world[i][j] = Tileset.FLOOR;
+                }
+            }
+        }
+    }
 
+    public boolean isEdge(int x, int y) {
+        return x == bottomLeft.getX() || x == bottomRight.getX()
+                || y == bottomLeft.getY() || y == topRight.getY();
     }
 
 }
