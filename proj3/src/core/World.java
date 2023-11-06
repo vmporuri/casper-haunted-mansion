@@ -19,12 +19,35 @@ public class World {
     private Random random;
     private WeightedQuickUnionUF wqu;
 
-    /** Generates a random world. */
-    public World(Random random) {
+    /** Generates a random world without an input string. */
+    public World() {
         world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
-        this.random = random;
+        this.random = new Random();
         drawAllRooms();
         drawAllHallways();
+    }
+
+    /** Generates a random world given an input string. */
+    public World(String inputString) {
+        world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
+        this.random = new Random(getSeed(inputString));
+        drawAllRooms();
+        drawAllHallways();
+    }
+
+    /** Retrieves the seed from an input string. */
+    private long getSeed(String inputString) {
+        if (inputString.toUpperCase().charAt(0) == 'N'
+            && inputString.toUpperCase().charAt(inputString.length()-1) == 'S') {
+            String seedString = inputString.substring(1, inputString.length()-2);
+            return Long.parseLong(seedString); // {@source https://stackoverflow.com/a/7693344}
+        }
+        return 0;
+    }
+
+    /** Returns the world. */
+    public TETile[][] getWorld() {
+        return world;
     }
 
     /** Draws up to MAX_NUM_ROOMS rooms. */
