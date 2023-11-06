@@ -60,7 +60,7 @@ public class Hallway {
         if (increment == 0) {
             return;
         }
-        for (int i = start.getX(); i <= end.getX(); i = i + increment) {
+        for (int i = start.getY(); i <= end.getY(); i = i + increment) {
             if (world[x-1][i] == Tileset.NOTHING) {
                 world[x-1][i] = Tileset.WALL;
             }
