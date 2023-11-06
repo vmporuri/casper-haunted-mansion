@@ -22,4 +22,16 @@ public class Coordinate {
     public int[] get() {
         return new int[]{x, y};
     }
+
+    public Coordinate average(Coordinate other) {
+        int midX = (x + other.getX()) / 2;
+        int midY = (y + other.getY()) / 2;
+        return new Coordinate(midX, midY);
+    }
+
+    public Coordinate findCorner(Coordinate other) {
+        int cornerX = other.getX() - x;
+        int cornerY = other.getY() - y;
+        return new Coordinate(cornerX, cornerY);
+    }
 }

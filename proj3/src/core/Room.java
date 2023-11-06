@@ -15,10 +15,10 @@ public class Room {
 
     private int length;
     private int height;
-    private Coordinate bottomLeft;
-    private Coordinate bottomRight;
-    private Coordinate topLeft;
-    private Coordinate topRight;
+    public Coordinate bottomLeft;
+    public Coordinate bottomRight;
+    public Coordinate topLeft;
+    public Coordinate topRight;
     private boolean drewRoom = false;
 
     public Room(Random random, TETile[][] world) {

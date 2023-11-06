@@ -1,5 +1,6 @@
 package core;
 
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 import tileengine.TETile;
 
 import java.util.List;
@@ -11,9 +12,11 @@ public class World {
     private static final int WORLD_LENGTH = 50;
     private static final int WORLD_HEIGHT = 30;
     private static final int MAX_NUM_ROOMS = 20;
+
     private TETile[][] world;
     private List<Room> rooms;
     private Random random;
+    private WeightedQuickUnionUF wqu;
 
     public World(Random random) {
         world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
@@ -27,6 +30,12 @@ public class World {
             if (newRoom.drewRoom()) {
                 rooms.add(newRoom);
             }
+        }
+    }
+
+    private void drawAllHallways() {
+        while (wqu.count() != 1) {
+
         }
     }
 
