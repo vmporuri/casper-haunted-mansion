@@ -28,10 +28,4 @@ public class Coordinate {
         int midY = (y + other.getY()) / 2;
         return new Coordinate(midX, midY);
     }
-
-    public Coordinate findCorner(Coordinate other) {
-        int cornerX = other.getX() - x;
-        int cornerY = other.getY() - y;
-        return new Coordinate(cornerX, cornerY);
-    }
 }
