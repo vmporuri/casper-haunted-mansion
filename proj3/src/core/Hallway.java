@@ -15,6 +15,7 @@ public class Hallway {
     /** Makes a brand new Hallway. */
     public Hallway(TETile[][] world, Random random, Room room1, Room room2) {
         this.world = world;
+        this.random = random;
         startRoom = room1;
         endRoom = room2;
         drawHallway();

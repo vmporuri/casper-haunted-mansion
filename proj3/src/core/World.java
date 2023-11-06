@@ -2,6 +2,7 @@ package core;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 import tileengine.TETile;
+import tileengine.Tileset;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -10,9 +11,9 @@ import java.util.Random;
 
 public class World {
 
-    private static final int WORLD_LENGTH = 50;
-    private static final int WORLD_HEIGHT = 30;
-    private static final int MAX_NUM_ROOMS = 20;
+    private static final int WORLD_LENGTH = 80;
+    private static final int WORLD_HEIGHT = 40;
+    private static final int MAX_NUM_ROOMS = 100;
 
     private TETile[][] world;
     private List<Room> rooms;
@@ -23,6 +24,7 @@ public class World {
     public World() {
         world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
         this.random = new Random();
+        setUpWorld();
         drawAllRooms();
         drawAllHallways();
     }
@@ -31,6 +33,7 @@ public class World {
     public World(String inputString) {
         world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
         this.random = new Random(getSeed(inputString));
+        setUpWorld();
         drawAllRooms();
         drawAllHallways();
     }
@@ -48,6 +51,15 @@ public class World {
     /** Returns the world. */
     public TETile[][] getWorld() {
         return world;
+    }
+
+    /** Fills the world array with NOTHINGs. */
+    private void setUpWorld() {
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world[0].length; j++) {
+                world[i][j] = Tileset.NOTHING;
+            }
+        }
     }
 
     /** Draws up to MAX_NUM_ROOMS rooms. */
