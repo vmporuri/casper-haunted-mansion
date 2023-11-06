@@ -10,7 +10,6 @@ import java.util.Random;
 
 public class World {
 
-    // build your own world!
     private static final int WORLD_LENGTH = 50;
     private static final int WORLD_HEIGHT = 30;
     private static final int MAX_NUM_ROOMS = 20;
