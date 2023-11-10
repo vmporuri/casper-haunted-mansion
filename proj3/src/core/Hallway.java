@@ -7,17 +7,19 @@ import java.util.Random;
 
 public class Hallway {
 
-    private TETile[][] world;
+    private Map map;
     private Room startRoom;
     private Room endRoom;
     private Random random;
+    private int hallwayID;
 
     /** Makes a brand new Hallway. */
-    public Hallway(TETile[][] world, Random random, Room room1, Room room2) {
-        this.world = world;
+    public Hallway(Map map, Random random, Room room1, Room room2, int hallwayID) {
+        this.map = map;
         this.random = random;
         startRoom = room1;
         endRoom = room2;
+        this.hallwayID = hallwayID;
         drawHallway();
     }
 
@@ -42,14 +44,11 @@ public class Hallway {
         if (increment == 0) {
             return;
         }
+        // this loop is causing problems
         for (int i = start.getX(); i <= end.getX(); i = i + increment) {
-            if (world[i][y-1] == Tileset.NOTHING) {
-                world[i][y-1] = Tileset.WALL;
-            }
-            world[i][y] = Tileset.FLOOR;
-            if (world[i][y+1] == Tileset.NOTHING) {
-                world[i][y+1] = Tileset.WALL;
-            }
+            map.placeWallIfEmpty(i, y-1);
+            map.placeFloor(i, y, hallwayID);
+            map.placeWallIfEmpty(i, y+1);
         }
     }
 
@@ -60,14 +59,11 @@ public class Hallway {
         if (increment == 0) {
             return;
         }
+        // this loop is causing problems
         for (int i = start.getY(); i <= end.getY(); i = i + increment) {
-            if (world[x-1][i] == Tileset.NOTHING) {
-                world[x-1][i] = Tileset.WALL;
-            }
-            world[x][i] = Tileset.FLOOR;
-            if (world[x+1][i] == Tileset.NOTHING) {
-                world[x+1][i] = Tileset.WALL;
-            }
+            map.placeWallIfEmpty(x-1, i);
+            map.placeFloor(x, i, hallwayID);
+            map.placeWallIfEmpty(x+1, i);
         }
     }
 }

@@ -2,7 +2,6 @@ package core;
 
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 import tileengine.TETile;
-import tileengine.Tileset;
 import utils.RandomUtils;
 
 import java.util.ArrayList;
@@ -13,27 +12,25 @@ public class World {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;
-    private static final int MAX_NUM_ROOMS = 100;
+    private static final int MAX_NUM_ROOMS = 50;
 
-    private TETile[][] world;
+    private Map map;
     private List<Room> rooms;
     private Random random;
     private WeightedQuickUnionUF wqu;
 
     /** Generates a random world without an input string. */
     public World() {
-        world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
+        map = new Map();
         this.random = new Random();
-        setUpWorld();
         drawAllRooms();
         drawAllHallways();
     }
 
     /** Generates a random world given an input string. */
     public World(String inputString) {
-        world = new TETile[WORLD_LENGTH][WORLD_HEIGHT];
+        map = new Map();
         this.random = new Random(getSeed(inputString));
-        setUpWorld();
         drawAllRooms();
         drawAllHallways();
     }
@@ -50,23 +47,15 @@ public class World {
 
     /** Returns the world. */
     public TETile[][] getWorld() {
-        return world;
+        return map.getWorld();
     }
 
-    /** Fills the world array with NOTHINGs. */
-    private void setUpWorld() {
-        for (int i = 0; i < world.length; i++) {
-            for (int j = 0; j < world[0].length; j++) {
-                world[i][j] = Tileset.NOTHING;
-            }
-        }
-    }
 
     /** Draws up to MAX_NUM_ROOMS rooms. */
     private void drawAllRooms() {
         rooms = new ArrayList<>();
         for (int i = 0; i < MAX_NUM_ROOMS; i++) {
-            Room newRoom = new Room(random, world);
+            Room newRoom = new Room(random, map, rooms.size());
             if (newRoom.drewRoom()) {
                 rooms.add(newRoom);
             }
@@ -75,14 +64,16 @@ public class World {
 
     /** Draws hallways until all rooms are connected. */
     private void drawAllHallways() {
+        int hallwayID = rooms.size();
         wqu = new WeightedQuickUnionUF(rooms.size());
-        while (wqu.count() != 1) {
+        while (wqu.count() > 1) {
             int rand1 = RandomUtils.uniform(random, rooms.size());
             int rand2 = RandomUtils.uniform(random, rooms.size());
             Room room1 = rooms.get(rand1);
             Room room2 = rooms.get(rand2);
-            Hallway hw = new Hallway(world, random, room1, room2);
+            Hallway hw = new Hallway(map, random, room1, room2, hallwayID);
             wqu.union(rand1, rand2);
+            hallwayID++;
         }
     }
 }

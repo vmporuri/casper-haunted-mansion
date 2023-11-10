@@ -17,25 +17,27 @@ public class Room {
     private int height;
     private int worldLength;
     private int worldHeight;
+    private int roomID;
     public Coordinate bottomLeft;
     public Coordinate bottomRight;
     public Coordinate topLeft;
     public Coordinate topRight;
     private boolean drewRoom = false;
 
-    public Room(Random random, TETile[][] world) {
+    public Room(Random random, Map map, int roomID) {
+        this.roomID = roomID;
         length = RandomUtils.uniform(random, MIN_ROOM_LENGTH, MAX_ROOM_LENGTH);
         height = RandomUtils.uniform(random, MIN_ROOM_HEIGHT, MAX_ROOM_HEIGHT);
-        worldLength = world.length;
-        worldHeight = world[0].length;
+        worldLength = map.getWorldLength();
+        worldHeight = map.getWorldHeight();
         int bottomLeftX = RandomUtils.uniform(random, worldLength - 1);
         int bottomLeftY = RandomUtils.uniform(random, worldHeight - 1);
         bottomLeft = new Coordinate(bottomLeftX, bottomLeftY);
         bottomRight = new Coordinate(bottomLeftX + length, bottomLeftY);
         topLeft = new Coordinate(bottomLeftX, bottomLeftY + height);
         topRight = new Coordinate(bottomLeftX + length, bottomLeftY + height);
-        if (validateRoom(world)) {
-            drawRoom(world);
+        if (validateRoom(map)) {
+            drawRoom(map);
             drewRoom = true;
         }
     }
@@ -46,13 +48,13 @@ public class Room {
     }
 
     /** Checks if the new room overlaps with any old rooms. */
-    public boolean validateRoom(TETile[][] world) {
+    public boolean validateRoom(Map map) {
         for (int i = bottomLeft.getX(); i <= bottomRight.getX(); i++) {
             for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
                 if (!validatePosition(i, j)) {
                     return false;
                 }
-                if (world[i][j] != Tileset.NOTHING) {
+                if (map.checkEmpty(i, j)) {
                     return false;
                 }
             }
@@ -61,23 +63,25 @@ public class Room {
     }
 
     /** Draws the room on the grid. */
-    public void drawRoom(TETile[][] world) {
+    public void drawRoom(Map map) {
         for (int i = bottomLeft.getX(); i <= bottomRight.getX(); i++) {
             for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
                 if (isEdge(i, j)) {
-                    world[i][j] = Tileset.WALL;
+                    map.placeWall(i, j);
                 } else {
-                    world[i][j] = Tileset.FLOOR;
+                    map.placeFloor(i, j, roomID);
                 }
             }
         }
     }
 
+    /** Returns true if it is an edge of the room. */
     public boolean isEdge(int x, int y) {
         return x == bottomLeft.getX() || x == bottomRight.getX()
                 || y == bottomLeft.getY() || y == topRight.getY();
     }
 
+    /** Returns true if we drew the room. */
     public boolean drewRoom() {
         return drewRoom;
     }
