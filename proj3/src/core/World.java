@@ -12,7 +12,7 @@ public class World {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;
-    private static final int MAX_NUM_ROOMS = 50;
+    private static final int MAX_NUM_ROOMS = 40;
 
     private Map map;
     private List<Room> rooms;

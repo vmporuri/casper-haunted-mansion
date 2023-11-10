@@ -44,8 +44,8 @@ public class Hallway {
         if (increment == 0) {
             return;
         }
-        // this loop is causing problems
-        for (int i = start.getX(); i <= end.getX(); i = i + increment) {
+
+        for (int i = start.getX(); i != end.getX() + increment; i = i + increment) {
             map.placeWallIfEmpty(i, y-1);
             map.placeFloor(i, y, hallwayID);
             map.placeWallIfEmpty(i, y+1);
@@ -59,8 +59,8 @@ public class Hallway {
         if (increment == 0) {
             return;
         }
-        // this loop is causing problems
-        for (int i = start.getY(); i <= end.getY(); i = i + increment) {
+
+        for (int i = start.getY(); i != end.getY() + increment; i = i + increment) {
             map.placeWallIfEmpty(x-1, i);
             map.placeFloor(x, i, hallwayID);
             map.placeWallIfEmpty(x+1, i);
