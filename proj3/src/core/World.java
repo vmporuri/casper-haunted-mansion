@@ -9,12 +9,15 @@ public class World {
 
     private final TERenderer ter;
     private final Map map;
+    private final HUD hud;
 
     /** Creates the world. */
     public World(long seed, TERenderer ter) {
         this.ter = ter;
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
+        ter.renderFrame(map.getWorld());
+        hud = new HUD(ter);
     }
 
     /** Returns the world of tiles. */
@@ -29,6 +32,7 @@ public class World {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
                 moveAvatar(nextChar);
                 ter.renderFrame(map.getWorld());
+                hud.updateHUD("test");
             }
         }
     }

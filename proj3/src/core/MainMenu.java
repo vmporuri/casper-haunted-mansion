@@ -13,7 +13,7 @@ public class MainMenu {
     private static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 60);
     private static final Font OPTION_FONT = new Font("SansSerif", Font.BOLD, 30);
     private static final int WINDOW_LENGTH = 80;
-    private static final int WINDOW_HEIGHT = 40;
+    private static final int WINDOW_HEIGHT = 42;
     private static final double CENTER_X = WINDOW_LENGTH / 2.;
     private static final double CENTER_Y = WINDOW_HEIGHT / 2.;
     private static final double OPTION_Y = WINDOW_HEIGHT / 4.;
@@ -74,8 +74,6 @@ public class MainMenu {
         long seed = getSeed();
         StdDraw.setFont();
         World world = new World(seed, ter);
-        TETile[][] worldState = world.getWorld();
-        ter.renderFrame(worldState);
         world.playGame();
     }
 
