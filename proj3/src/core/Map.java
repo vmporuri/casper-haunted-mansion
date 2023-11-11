@@ -14,6 +14,7 @@ public class Map {
     private static final int AVATAR_ID = -4;
     private final TETile[][] world;
     private final int[][] gameState;
+    private Coordinate playerLocation;
 
     /** Creates a new Map instance. */
     public Map() {
@@ -75,6 +76,16 @@ public class Map {
         placeWallIfEmpty(coords.getX(), coords.getY());
     }
 
+    /** Returns true if the location is a wall. */
+    public boolean isWall(int x, int y) {
+        return gameState[x][y] == WALL_ID;
+    }
+
+    /** Returns true if the Coordinate is a wall. */
+    public boolean isWall(Coordinate coords) {
+        return isWall(coords.getX(), coords.getX());
+    }
+
     /** Places a wall and records its position in gameState. */
     public void placeFloor(int x, int y) {
         world[x][y] = Tileset.FLOOR;
@@ -111,7 +122,20 @@ public class Map {
 
     /** Places the player's avatar. */
     public void placePlayer(int x, int y) {
+        placePlayer(new Coordinate(x, y));
+    }
+
+    /** Places the player's avatar. */
+    public void placePlayer(Coordinate coords) {
+        int x = coords.getX();
+        int y = coords.getY();
         world[x][y] = Tileset.AVATAR;
         gameState[x][y] = AVATAR_ID;
+        playerLocation = coords;
+    }
+
+    /** Gets the player's location. */
+    public Coordinate getPlayerLocation() {
+        return playerLocation;
     }
 }
