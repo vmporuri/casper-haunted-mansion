@@ -8,6 +8,7 @@ public class Map {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;
+    private static final int AVATAR_ID = -3;
     private static final int NOTHING_ID = -2;
     private static final int WALL_ID = -1;
     private TETile[][] world;
@@ -69,5 +70,11 @@ public class Map {
     public void placeFloor(int x, int y, int id) {
         world[x][y] = Tileset.FLOOR;
         gameState[x][y] = id;
+    }
+
+    /** Places the player's avatar. */
+    public void placePlayer(int x, int y) {
+        world[x][y] = Tileset.AVATAR;
+        gameState[x][y] = AVATAR_ID;
     }
 }

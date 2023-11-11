@@ -25,6 +25,7 @@ public class World {
         this.random = new Random(seed);
         drawAllRooms();
         drawAllHallways();
+        placePlayer();
     }
 
     /** Generates a random world given an input string. */
@@ -33,6 +34,7 @@ public class World {
         this.random = new Random(getSeed(inputString));
         drawAllRooms();
         drawAllHallways();
+        placePlayer();
     }
 
     /** Retrieves the seed from an input string. */
@@ -75,5 +77,12 @@ public class World {
             wqu.union(rand1, rand2);
             hallwayID++;
         }
+    }
+
+    /** Places the player's avatar in a random room. */
+    private void placePlayer() {
+        Room firstRoom = rooms.get(0);
+        Coordinate center = firstRoom.getBottomLeft().average(firstRoom.getTopRight());
+        map.placePlayer(center.getX(), center.getY());
     }
 }
