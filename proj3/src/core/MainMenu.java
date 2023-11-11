@@ -5,6 +5,7 @@ import tileengine.TERenderer;
 import tileengine.TETile;
 
 import java.awt.*;
+import java.util.Set;
 
 /** The main menu. */
 public class MainMenu {
@@ -46,12 +47,16 @@ public class MainMenu {
 
     /** Listens for keyboard input. */
     private void getPlayerInput() {
+        char nextChar;
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
-                char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
-                handleKeyInput(nextChar);
+                nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
+                if (Set.of('n', 'l', 's').contains(nextChar)) {
+                    break;
+                }
             }
         }
+        handleKeyInput(nextChar);
     }
 
     /** Handles the key input. */
