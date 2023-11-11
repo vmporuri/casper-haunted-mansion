@@ -6,23 +6,23 @@ public class Coordinate {
     int x;
     int y;
 
+    /** Creates a new Coordinate instance. */
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+    /** Gets the x-coordinate. */
     public int getX() {
         return x;
     }
 
+    /** Gets the y-coordinate. */
     public int getY() {
         return y;
     }
 
-    public int[] get() {
-        return new int[]{x, y};
-    }
-
+    /** Returns the average position of two coordinates. */
     public Coordinate average(Coordinate other) {
         int midX = (x + other.getX()) / 2;
         int midY = (y + other.getY()) / 2;
