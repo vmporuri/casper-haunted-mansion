@@ -80,32 +80,35 @@ public class MainMenu {
 
     /** Gets the seed from player input until 's' is pressed. */
     private long getSeed() {
-        long seed = 0;
-        updateGetSeedScreen(0);
+        StringBuilder seedString = new StringBuilder();
+        updateGetSeedScreen(seedString);
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = StdDraw.nextKeyTyped();
                 if (nextChar == 's' || nextChar == 'S') {
-                    return seed;
+                    if (seedString.isEmpty()) {
+                        return 0;
+                    }
+                    return Long.parseLong(seedString.toString());
                 } else if (nextChar == '\b') {
-                    seed /= 10;
-                    updateGetSeedScreen(seed);
+                    // @source From https://stackoverflow.com/a/3395329
+                    if (!seedString.isEmpty()) {
+                        seedString.setLength(seedString.length() - 1);
+                    }
+                    updateGetSeedScreen(seedString);
                 } else if (Character.isDigit(nextChar)) {
-                    long nextDigit = Character.getNumericValue(nextChar);
-                    seed = seed * 10 + nextDigit;
-                    updateGetSeedScreen(seed);
+                    seedString.append(nextChar);
+                    updateGetSeedScreen(seedString);
                 }
             }
         }
     }
 
     /** Updates the seed screen. */
-    private void updateGetSeedScreen(long seed) {
+    private void updateGetSeedScreen(StringBuilder seed) {
         StdDraw.clear(StdDraw.BLACK);
         StdDraw.text(CENTER_X, CENTER_Y + OFFSET, "Please input a random seed:");
-        if (seed != 0) {
-            StdDraw.text(CENTER_X, CENTER_Y - OFFSET, Long.toString(seed));
-        }
+        StdDraw.text(CENTER_X, CENTER_Y - OFFSET, seed.toString());
         StdDraw.show();
     }
 }
