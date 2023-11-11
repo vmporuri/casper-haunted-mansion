@@ -40,6 +40,22 @@ public class Room {
         }
     }
 
+    public Coordinate getBottomLeft() {
+        return bottomLeft;
+    }
+
+    public Coordinate getBottomRight() {
+        return bottomRight;
+    }
+
+    public Coordinate getTopLeft() {
+        return topLeft;
+    }
+
+    public Coordinate getTopRight() {
+        return topRight;
+    }
+
     /** Checks if a set of coordinates is inside the world. */
     public boolean validatePosition(int x, int y) {
         return 0 <= x && x < worldLength && 0 <= y && y < worldHeight;

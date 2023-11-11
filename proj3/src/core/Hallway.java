@@ -22,8 +22,8 @@ public class Hallway {
 
     /** Draws an L-shaped hallway connecting STARTROOM and ENDROOM. */
     private void drawHallway() {
-        Coordinate startCenter = startRoom.bottomLeft.average(startRoom.topRight);
-        Coordinate endCenter = endRoom.bottomLeft.average(endRoom.topRight);
+        Coordinate startCenter = startRoom.getBottomLeft().average(startRoom.getTopRight());
+        Coordinate endCenter = endRoom.getBottomLeft().average(endRoom.getTopRight());
         boolean horizontalFirst = random.nextBoolean();
         if (horizontalFirst) {
             drawHorizontalHallway(startCenter, endCenter, startCenter.getY());
