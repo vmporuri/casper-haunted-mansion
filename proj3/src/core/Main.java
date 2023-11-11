@@ -5,7 +5,7 @@ import tileengine.TETile;
 
 public class Main {
     public static void main(String[] args) {
-        // {@source} From Proj 2, Video 2 Skeleton Code Structure
+        // @source From Proj 2, Video 2 Skeleton Code Structure
         if (args.length > 1) {
             System.out.println("Can only have one argument.");
             System.exit(0);
@@ -20,7 +20,9 @@ public class Main {
             TETile[][] worldState = world.getWorld();
             TERenderer ter = new TERenderer();
             ter.initialize(worldState.length, worldState[0].length);
-            ter.renderFrame(worldState);
+            MainMenu mm = new MainMenu(worldState.length, worldState[0].length);
+            mm.createMainMenu();
+//            ter.renderFrame(worldState);
         }
     }
 }
