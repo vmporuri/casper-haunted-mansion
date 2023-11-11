@@ -8,11 +8,12 @@ public class Map {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;
-    private static final int WALL_ID = -1;
-    private static final int NOTHING_ID = -2;
-    private static final int AVATAR_ID = -3;
-    private TETile[][] world;
-    private int[][] gameState;
+    private static final int NOTHING_ID = -1;
+    private static final int WALL_ID = -2;
+    private static final int HALLWAY_ID = -3;
+    private static final int AVATAR_ID = -4;
+    private final TETile[][] world;
+    private final int[][] gameState;
 
     /** Creates a new Map instance. */
     public Map() {
@@ -23,22 +24,25 @@ public class Map {
 
     /** Fills the world array with NOTHINGs. */
     private void setUpWorld() {
-        for (int i = 0; i < world.length; i++) {
-            for (int j = 0; j < world[0].length; j++) {
+        for (int i = 0; i < WORLD_LENGTH; i++) {
+            for (int j = 0; j < WORLD_HEIGHT; j++) {
                 world[i][j] = Tileset.NOTHING;
                 gameState[i][j] = NOTHING_ID;
             }
         }
     }
 
+    /** Returns the world as an array of tiles. */
     public TETile[][] getWorld() {
         return world;
     }
 
+    /** Returns the world length. */
     public int getWorldLength() {
         return WORLD_LENGTH;
     }
 
+    /** Returns the world height. */
     public int getWorldHeight() {
         return WORLD_HEIGHT;
     }
@@ -67,9 +71,27 @@ public class Map {
     }
 
     /** Places a wall and records its position in gameState. */
-    public void placeFloor(int x, int y, int id) {
+    public void placeFloor(int x, int y) {
         world[x][y] = Tileset.FLOOR;
+        if (getID(x, y) == NOTHING_ID) {
+            gameState[x][y] = HALLWAY_ID;
+        }
+    }
+
+    /** Places a wall and records its position in gameState. */
+    public void placeFloorWithID(int x, int y, int id) {
+        placeFloor(x, y);
         gameState[x][y] = id;
+    }
+
+    /** Retrieves the ID of the location if there is one. */
+    public int getID(int x, int y) {
+        return gameState[x][y];
+    }
+
+    /** Returns true if an ID is a room id and false otherwise. */
+    public boolean isRoomID(int id) {
+        return id >= 0;
     }
 
     /** Places the player's avatar. */

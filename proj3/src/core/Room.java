@@ -76,7 +76,7 @@ public class Room {
                 if (isEdge(i, j)) {
                     map.placeWall(i, j);
                 } else {
-                    map.placeFloor(i, j, roomID);
+                    map.placeFloorWithID(i, j, roomID);
                 }
             }
         }
@@ -96,5 +96,10 @@ public class Room {
     /** Returns the location of the center of the room. */
     public Coordinate getRoomCenter() {
         return bottomLeft.average(topRight);
+    }
+
+    /** Returns the roomID. */
+    public int getRoomID() {
+        return roomID;
     }
 }

@@ -10,11 +10,12 @@ import java.util.Random;
 
 public class World {
 
-    private static final int MAX_NUM_ROOMS = 50;
+    private static final int MAX_NUM_ROOMS = 25;
 
-    private Map map;
+    private final Map map;
     private List<Room> rooms;
-    private Random random;
+    private List<Hallway> hallways;
+    private final Random random;
     private WeightedQuickUnionUF wqu;
 
     /** Generates a random world without an input string. */
@@ -64,23 +65,23 @@ public class World {
 
     /** Draws hallways until all rooms are connected. */
     private void drawAllHallways() {
-        int hallwayID = rooms.size();
+        hallways = new ArrayList<>();
         wqu = new WeightedQuickUnionUF(rooms.size());
         while (wqu.count() > 1) {
             int rand1 = RandomUtils.uniform(random, rooms.size());
             int rand2 = RandomUtils.uniform(random, rooms.size());
             Room room1 = rooms.get(rand1);
             Room room2 = rooms.get(rand2);
-            Hallway hw = new Hallway(map, random, room1, room2, hallwayID);
+            Hallway hw = new Hallway(map, random, room1, room2, wqu);
+            hallways.add(hw);
             wqu.union(rand1, rand2);
-            hallwayID++;
         }
     }
 
     /** Places the player's avatar in a random room. */
     private void placePlayer() {
         Room firstRoom = rooms.get(0);
-        Coordinate center = firstRoom.getBottomLeft().average(firstRoom.getTopRight());
+        Coordinate center = firstRoom.getRoomCenter();
         map.placePlayer(center.getX(), center.getY());
     }
 }

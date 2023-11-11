@@ -1,22 +1,26 @@
 package core;
 
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
+
 import java.util.Random;
 
+/** A hallway between two rooms. */
 public class Hallway {
 
-    private Map map;
-    private Room startRoom;
-    private Room endRoom;
-    private Random random;
-    private int hallwayID;
+    private final Map map;
+    private final Room startRoom;
+    private final Room endRoom;
+    private final Random random;
+    private final WeightedQuickUnionUF wqu;
 
-    /** Makes a brand new Hallway. */
-    public Hallway(Map map, Random random, Room room1, Room room2, int hallwayID) {
+    /** Makes a brand-new Hallway. */
+    public Hallway(Map map, Random random, Room room1, Room room2, WeightedQuickUnionUF wqu) {
         this.map = map;
         this.random = random;
         startRoom = room1;
         endRoom = room2;
-        this.hallwayID = hallwayID;
+        this.wqu = wqu;
+        wqu.union(startRoom.getRoomID(), endRoom.getRoomID());
         drawHallway();
     }
 
@@ -44,8 +48,12 @@ public class Hallway {
 
         for (int i = start.getX(); i != end.getX() + increment; i = i + increment) {
             map.placeWallIfEmpty(i, y - 1);
-            map.placeFloor(i, y, hallwayID);
+            map.placeFloor(i, y);
             map.placeWallIfEmpty(i, y + 1);
+            int id = map.getID(i, y);
+            if (map.isRoomID(id)) {
+                wqu.union(startRoom.getRoomID(), id);
+            }
         }
     }
 
@@ -59,8 +67,12 @@ public class Hallway {
 
         for (int i = start.getY(); i != end.getY() + increment; i = i + increment) {
             map.placeWallIfEmpty(x - 1, i);
-            map.placeFloor(x, i, hallwayID);
+            map.placeFloor(x, i);
             map.placeWallIfEmpty(x + 1, i);
+            int id = map.getID(x, i);
+            if (map.isRoomID(id)) {
+                wqu.union(startRoom.getRoomID(), id);
+            }
         }
     }
 }
