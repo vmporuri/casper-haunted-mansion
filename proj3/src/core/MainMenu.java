@@ -14,10 +14,10 @@ public class MainMenu {
     private static final Font OPTION_FONT = new Font("SansSerif", Font.BOLD, 30);
     private static final int WINDOW_LENGTH = 80;
     private static final int WINDOW_HEIGHT = 40;
-    private static final double centerX = WINDOW_LENGTH / 2.;
-    private static final double centerY = WINDOW_HEIGHT / 2.;
-    private static final double optionY = WINDOW_HEIGHT / 4.;
-    private static final double titleY = 3. * WINDOW_HEIGHT / 4;
+    private static final double CENTER_X = WINDOW_LENGTH / 2.;
+    private static final double CENTER_Y = WINDOW_HEIGHT / 2.;
+    private static final double OPTION_Y = WINDOW_HEIGHT / 4.;
+    private static final double TITLE_Y = 3. * WINDOW_HEIGHT / 4;
     private static final int OFFSET = 2;
     private final TERenderer ter;
 
@@ -37,11 +37,11 @@ public class MainMenu {
     private void createMainMenu() {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.setFont(TITLE_FONT);
-        StdDraw.text(centerX, titleY, "CS61B: THE GAME");
+        StdDraw.text(CENTER_X, TITLE_Y, "CS61B: THE GAME");
         StdDraw.setFont(OPTION_FONT);
-        StdDraw.text(centerX, optionY + OFFSET, "New Game (N)");
-        StdDraw.text(centerX, optionY, "Load Game (L)");
-        StdDraw.text(centerX, optionY - OFFSET, "Quit (Q)");
+        StdDraw.text(CENTER_X, OPTION_Y + OFFSET, "New Game (N)");
+        StdDraw.text(CENTER_X, OPTION_Y, "Load Game (L)");
+        StdDraw.text(CENTER_X, OPTION_Y - OFFSET, "Quit (Q)");
         StdDraw.show();
     }
 
@@ -63,8 +63,9 @@ public class MainMenu {
     private void handleKeyInput(char nextChar) {
         switch (nextChar) {
             case 'n' -> createNewWorld();
-//            case 'l' -> loadGameFromSave();
-//            case 'q' -> quitGame();
+            // case 'l' -> loadGameFromSave();
+            // case 'q' -> quitGame();
+            default -> getPlayerInput();
         }
     }
 
@@ -101,9 +102,9 @@ public class MainMenu {
     /** Updates the seed screen. */
     private void updateGetSeedScreen(long seed) {
         StdDraw.clear(StdDraw.BLACK);
-        StdDraw.text(centerX, centerY + OFFSET, "Please input a random seed:");
+        StdDraw.text(CENTER_X, CENTER_Y + OFFSET, "Please input a random seed:");
         if (seed != 0) {
-            StdDraw.text(centerX, centerY - OFFSET, Long.toString(seed));
+            StdDraw.text(CENTER_X, CENTER_Y - OFFSET, Long.toString(seed));
         }
         StdDraw.show();
     }
