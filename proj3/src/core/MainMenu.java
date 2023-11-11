@@ -73,9 +73,10 @@ public class MainMenu {
     private void createNewWorld() {
         long seed = getSeed();
         StdDraw.setFont();
-        World world = new World(seed);
+        World world = new World(seed, ter);
         TETile[][] worldState = world.getWorld();
         ter.renderFrame(worldState);
+        world.playGame();
     }
 
     /** Gets the seed from player input until 's' is pressed. */

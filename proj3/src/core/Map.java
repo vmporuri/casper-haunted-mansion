@@ -83,23 +83,23 @@ public class Map {
 
     /** Returns true if the Coordinate is a wall. */
     public boolean isWall(Coordinate coords) {
-        return isWall(coords.getX(), coords.getX());
+        return isWall(coords.getX(), coords.getY());
     }
 
-    /** Places a wall and records its position in gameState. */
+    /** Places a floor tile and records its position in gameState. */
     public void placeFloor(int x, int y) {
         world[x][y] = Tileset.FLOOR;
-        if (getID(x, y) == NOTHING_ID) {
+        if (!isRoomID(getID(x, y))) {
             gameState[x][y] = HALLWAY_ID;
         }
     }
 
-    /** Places a wall and records its position in gameState. */
+    /** Places a floor tile and records its position in gameState. */
     public void placeFloor(Coordinate coords) {
         placeFloor(coords.getX(), coords.getY());
     }
 
-    /** Places a wall and records its position in gameState. */
+    /** Places a floor tile and records its position in gameState. */
     public void placeFloorWithID(int x, int y, int id) {
         placeFloor(x, y);
         gameState[x][y] = id;

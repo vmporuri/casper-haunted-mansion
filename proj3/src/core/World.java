@@ -1,15 +1,18 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
+import tileengine.TERenderer;
 import tileengine.TETile;
 
 /** The game. */
 public class World {
 
+    private final TERenderer ter;
     private final Map map;
 
     /** Creates the world. */
-    public World(long seed) {
+    public World(long seed, TERenderer ter) {
+        this.ter = ter;
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
     }
@@ -25,6 +28,7 @@ public class World {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
                 moveAvatar(nextChar);
+                ter.renderFrame(map.getWorld());
             }
         }
     }
@@ -44,7 +48,7 @@ public class World {
         }
         Coordinate oldLocation = map.getPlayerLocation();
         Coordinate newLocation = oldLocation.plus(movement);
-        if (map.isWall(newLocation)) {
+        if (!map.isWall(newLocation)) {
             map.placePlayer(newLocation);
             map.placeFloor(oldLocation);
         }
