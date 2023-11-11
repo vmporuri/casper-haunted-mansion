@@ -9,8 +9,8 @@ import java.awt.*;
 /** The main menu. */
 public class MainMenu {
 
-    private static final Font TITLE_FONT = new Font("Laro Soft", Font.BOLD, 60);
-    private static final Font OPTION_FONT = new Font("Jam Grotesque", Font.BOLD, 30);
+    private static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 60);
+    private static final Font OPTION_FONT = new Font("SansSerif", Font.BOLD, 30);
     private static final int WINDOW_LENGTH = 80;
     private static final int WINDOW_HEIGHT = 40;
     private static final double centerX = WINDOW_LENGTH / 2.;
@@ -41,7 +41,7 @@ public class MainMenu {
     }
 
     /** Listens for keyboard input. */
-    public void getPlayerInput() {
+    private void getPlayerInput() {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
@@ -92,7 +92,7 @@ public class MainMenu {
     /** Updates the seed screen. */
     private void updateGetSeedScreen(long seed) {
         StdDraw.clear(StdDraw.BLACK);
-        StdDraw.text(centerX, centerY, "Please input a random seed:");
+        StdDraw.text(centerX, centerY + OFFSET, "Please input a random seed:");
         if (seed != 0) {
             StdDraw.text(centerX, centerY - OFFSET, Long.toString(seed));
         }
