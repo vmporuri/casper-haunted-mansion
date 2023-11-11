@@ -80,10 +80,11 @@ public class MainMenu {
                 char nextChar = StdDraw.nextKeyTyped();
                 if (nextChar == 's' || nextChar == 'S') {
                     return seed;
+                } else if (Character.isDigit(nextChar)) {
+                    long nextDigit = Character.getNumericValue(nextChar);
+                    seed = seed * 10 + nextDigit;
+                    updateGetSeedScreen(seed);
                 }
-                long nextDigit = Character.getNumericValue(nextChar);
-                seed = seed * 10 + nextDigit;
-                updateGetSeedScreen(seed);
             }
         }
     }
