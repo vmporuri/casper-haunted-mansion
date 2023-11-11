@@ -16,12 +16,12 @@ public class Main {
             ter.initialize(worldState.length, worldState[0].length);
             ter.renderFrame(worldState);
         } else {
-            World world = new World();
+            World world = new World(1);
             TETile[][] worldState = world.getWorld();
             TERenderer ter = new TERenderer();
             ter.initialize(worldState.length, worldState[0].length);
-            MainMenu mm = new MainMenu(worldState.length, worldState[0].length);
-            mm.createMainMenu();
+            MainMenu mm = new MainMenu(worldState.length, worldState[0].length, ter);
+//            mm.createMainMenu();
 //            ter.renderFrame(worldState);
         }
     }

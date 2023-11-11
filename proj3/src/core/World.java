@@ -20,9 +20,9 @@ public class World {
     private WeightedQuickUnionUF wqu;
 
     /** Generates a random world without an input string. */
-    public World() {
+    public World(long seed) {
         map = new Map();
-        this.random = new Random();
+        this.random = new Random(seed);
         drawAllRooms();
         drawAllHallways();
     }
