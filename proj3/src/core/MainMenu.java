@@ -24,6 +24,10 @@ public class MainMenu {
     public MainMenu(TERenderer ter) {
         this.ter = ter;
         ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT);
+    }
+
+    /** Opens the main menu. */
+    public void openMainMenu() {
         createMainMenu();
         getPlayerInput();
     }

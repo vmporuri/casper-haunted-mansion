@@ -18,10 +18,19 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        World world = new World(input);
+        World world = new World(getSeed(input));
         return world.getWorld();
     }
 
+    /** Retrieves the seed from an input string. */
+    private static long getSeed(String inputString) {
+        if (inputString.toUpperCase().charAt(0) == 'N'
+                && inputString.toUpperCase().charAt(inputString.length() - 1) == 'S') {
+            String seedString = inputString.substring(1, inputString.length() - 2);
+            return Long.parseLong(seedString); // {@source https://stackoverflow.com/a/7693344}
+        }
+        return 0;
+    }
 
     /**
      * Used to tell the autograder which tiles are the floor/ground (including
