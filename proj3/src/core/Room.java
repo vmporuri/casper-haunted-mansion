@@ -1,7 +1,5 @@
 package core;
 
-import tileengine.TETile;
-import tileengine.Tileset;
 import utils.RandomUtils;
 
 import java.util.Random;
@@ -18,10 +16,10 @@ public class Room {
     private int worldLength;
     private int worldHeight;
     private int roomID;
-    public Coordinate bottomLeft;
-    public Coordinate bottomRight;
-    public Coordinate topLeft;
-    public Coordinate topRight;
+    private Coordinate bottomLeft;
+    private Coordinate bottomRight;
+    private Coordinate topLeft;
+    private Coordinate topRight;
     private boolean drewRoom = false;
 
     public Room(Random random, Map map, int roomID) {

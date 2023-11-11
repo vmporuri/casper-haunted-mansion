@@ -1,8 +1,5 @@
 package core;
 
-import tileengine.TETile;
-import tileengine.Tileset;
-
 import java.util.Random;
 
 public class Hallway {
@@ -46,9 +43,9 @@ public class Hallway {
         }
 
         for (int i = start.getX(); i != end.getX() + increment; i = i + increment) {
-            map.placeWallIfEmpty(i, y-1);
+            map.placeWallIfEmpty(i, y - 1);
             map.placeFloor(i, y, hallwayID);
-            map.placeWallIfEmpty(i, y+1);
+            map.placeWallIfEmpty(i, y + 1);
         }
     }
 
@@ -61,9 +58,9 @@ public class Hallway {
         }
 
         for (int i = start.getY(); i != end.getY() + increment; i = i + increment) {
-            map.placeWallIfEmpty(x-1, i);
+            map.placeWallIfEmpty(x - 1, i);
             map.placeFloor(x, i, hallwayID);
-            map.placeWallIfEmpty(x+1, i);
+            map.placeWallIfEmpty(x + 1, i);
         }
     }
 }

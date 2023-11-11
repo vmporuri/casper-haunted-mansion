@@ -38,8 +38,8 @@ public class World {
     /** Retrieves the seed from an input string. */
     private long getSeed(String inputString) {
         if (inputString.toUpperCase().charAt(0) == 'N'
-            && inputString.toUpperCase().charAt(inputString.length()-1) == 'S') {
-            String seedString = inputString.substring(1, inputString.length()-2);
+                && inputString.toUpperCase().charAt(inputString.length() - 1) == 'S') {
+            String seedString = inputString.substring(1, inputString.length() - 2);
             return Long.parseLong(seedString); // {@source https://stackoverflow.com/a/7693344}
         }
         return 0;
