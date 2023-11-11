@@ -18,8 +18,8 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        World world = new World(getSeed(input));
-        return world.getWorld();
+        RandomWorldGenerator randomWorldGenerator = new RandomWorldGenerator(getSeed(input));
+        return randomWorldGenerator.getWorld();
     }
 
     /** Retrieves the seed from an input string. */
