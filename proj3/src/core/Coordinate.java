@@ -28,4 +28,32 @@ public class Coordinate {
         int midY = (y + other.getY()) / 2;
         return new Coordinate(midX, midY);
     }
+
+    /** Adds two coordinates together. */
+    public Coordinate plus(Coordinate other) {
+        int sumX = x + other.getX();
+        int sumY = y + other.getY();
+        return new Coordinate(sumX, sumY);
+    }
+
+    /** Subtracts OTHER from THIS Coordinate. */
+    public Coordinate minus(Coordinate other) {
+        int diffX = x - other.getX();
+        int diffY = y - other.getY();
+        return new Coordinate(diffX, diffY);
+    }
+
+    /** Computes the coordinates of the hinge with THIS's x and OTHER's y coordinate. */
+    public Coordinate hinge(Coordinate other) {
+        return new Coordinate(x, other.getY());
+    }
+
+    /** Two coordinates are equal if and only if their x and y coordinates are the same. */
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Coordinate other) {
+            return x == other.getX() && y == other.getY();
+        }
+        return false;
+    }
 }

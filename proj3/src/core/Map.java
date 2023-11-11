@@ -70,12 +70,22 @@ public class Map {
         }
     }
 
+    /** Places a wall if the position is open. */
+    public void placeWallIfEmpty(Coordinate coords) {
+        placeWallIfEmpty(coords.getX(), coords.getY());
+    }
+
     /** Places a wall and records its position in gameState. */
     public void placeFloor(int x, int y) {
         world[x][y] = Tileset.FLOOR;
         if (getID(x, y) == NOTHING_ID) {
             gameState[x][y] = HALLWAY_ID;
         }
+    }
+
+    /** Places a wall and records its position in gameState. */
+    public void placeFloor(Coordinate coords) {
+        placeFloor(coords.getX(), coords.getY());
     }
 
     /** Places a wall and records its position in gameState. */
@@ -87,6 +97,11 @@ public class Map {
     /** Retrieves the ID of the location if there is one. */
     public int getID(int x, int y) {
         return gameState[x][y];
+    }
+
+    /** Retrieves the ID of the location if there is one. */
+    public int getID(Coordinate coords) {
+        return getID(coords.getX(), coords.getY());
     }
 
     /** Returns true if an ID is a room id and false otherwise. */
