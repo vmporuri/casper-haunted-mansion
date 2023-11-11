@@ -55,7 +55,7 @@ public class Room {
     }
 
     /** Checks if the new room overlaps with any old rooms. */
-    public boolean validateRoom(Map map) {
+    private boolean validateRoom(Map map) {
         for (int i = bottomLeft.getX(); i <= topRight.getX(); i++) {
             for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
                 if (!map.validatePosition(i, j)) {
@@ -70,7 +70,7 @@ public class Room {
     }
 
     /** Draws the room on the grid. */
-    public void drawRoom(Map map) {
+    private void drawRoom(Map map) {
         for (int i = bottomLeft.getX(); i <= topRight.getX(); i++) {
             for (int j = bottomLeft.getY(); j <= topRight.getY(); j++) {
                 if (isEdge(i, j)) {
@@ -83,7 +83,7 @@ public class Room {
     }
 
     /** Returns true if it is an edge of the room. */
-    public boolean isEdge(int x, int y) {
+    private boolean isEdge(int x, int y) {
         return x == bottomLeft.getX() || x == topRight.getX()
                 || y == bottomLeft.getY() || y == topRight.getY();
     }

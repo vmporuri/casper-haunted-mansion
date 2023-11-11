@@ -33,7 +33,7 @@ public class MainMenu {
     }
 
     /** Creates the main menu. */
-    public void createMainMenu() {
+    private void createMainMenu() {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.setFont(TITLE_FONT);
         StdDraw.text(centerX, titleY, "CS61B: THE GAME");
