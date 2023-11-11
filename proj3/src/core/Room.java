@@ -7,10 +7,10 @@ import java.util.Random;
 /** A rectangular room. */
 public class Room {
 
-    private static final int MIN_ROOM_LENGTH = 5;
-    private static final int MIN_ROOM_HEIGHT = 5;
-    private static final int MAX_ROOM_LENGTH = 10;
-    private static final int MAX_ROOM_HEIGHT = 10;
+    private static final int MIN_ROOM_LENGTH = 6;
+    private static final int MIN_ROOM_HEIGHT = 6;
+    private static final int MAX_ROOM_LENGTH = 12;
+    private static final int MAX_ROOM_HEIGHT = 12;
 
     private final int roomID;
     private int length;
