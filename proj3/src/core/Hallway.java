@@ -46,7 +46,7 @@ public class Hallway {
             return;
         }
 
-        for (int i = start.getX(); i != end.getX() + increment; i = i + increment) {
+        for (int i = start.getX(); i != end.getX() + increment; i += increment) {
             map.placeWallIfEmpty(i, y - 1);
             map.placeFloor(i, y);
             map.placeWallIfEmpty(i, y + 1);
@@ -55,6 +55,10 @@ public class Hallway {
                 wqu.union(startRoom.getRoomID(), id);
             }
         }
+
+        // Adds the corner to the hallway
+        map.placeWallIfEmpty(end.getX() + increment, y - 1);
+        map.placeWallIfEmpty(end.getX() + increment, y + 1);
     }
 
     /** Draws the vertical portion of an L-shaped hallway. */
@@ -65,7 +69,7 @@ public class Hallway {
             return;
         }
 
-        for (int i = start.getY(); i != end.getY() + increment; i = i + increment) {
+        for (int i = start.getY(); i != end.getY() + increment; i += increment) {
             map.placeWallIfEmpty(x - 1, i);
             map.placeFloor(x, i);
             map.placeWallIfEmpty(x + 1, i);
@@ -74,5 +78,9 @@ public class Hallway {
                 wqu.union(startRoom.getRoomID(), id);
             }
         }
+
+        // Adds the corner to the hallway
+        map.placeWallIfEmpty(x - 1, end.getY() + increment);
+        map.placeWallIfEmpty(x + 1, end.getY() + increment);
     }
 }
