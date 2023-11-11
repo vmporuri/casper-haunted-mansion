@@ -9,22 +9,21 @@ import java.awt.*;
 /** The main menu. */
 public class MainMenu {
 
-    private static Font TITLE_FONT = new Font("Laro Soft", Font.BOLD, 60);
-    private static Font OPTION_FONT = new Font("Jam Grotesque", Font.BOLD, 30);
-    private static int OFFSET = 2;
-    private double centerX;
-    private double centerY;
-    private double optionY;
-    private double titleY;
-    private TERenderer ter;
+    private static final Font TITLE_FONT = new Font("Laro Soft", Font.BOLD, 60);
+    private static final Font OPTION_FONT = new Font("Jam Grotesque", Font.BOLD, 30);
+    private static final int WINDOW_LENGTH = 80;
+    private static final int WINDOW_HEIGHT = 40;
+    private static final double centerX = WINDOW_LENGTH / 2.;
+    private static final double centerY = WINDOW_HEIGHT / 2.;
+    private static final double optionY = WINDOW_HEIGHT / 4.;
+    private static final double titleY = 3. * WINDOW_HEIGHT / 4;
+    private static final int OFFSET = 2;
+    private final TERenderer ter;
 
     /** A main menu instance. */
-    public MainMenu(int length, int height, TERenderer ter) {
-        centerX = length / 2.;
-        centerY = height / 2.;
-        optionY = height / 4.;
-        titleY = 3. * height / 4;
+    public MainMenu(TERenderer ter) {
         this.ter = ter;
+        ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT);
         createMainMenu();
         getPlayerInput();
     }
@@ -71,15 +70,16 @@ public class MainMenu {
 
     /** Gets the seed from player input until 's' is pressed. */
     private long getSeed() {
-        StdDraw.clear(StdDraw.BLACK);
-        StdDraw.text(centerX, centerY, "Please input a random seed:");
-        StdDraw.show();
         long seed = 0;
+        updateGetSeedScreen(0);
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = StdDraw.nextKeyTyped();
                 if (nextChar == 's' || nextChar == 'S') {
                     return seed;
+                } else if (nextChar == '\b') {
+                    seed /= 10;
+                    updateGetSeedScreen(seed);
                 } else if (Character.isDigit(nextChar)) {
                     long nextDigit = Character.getNumericValue(nextChar);
                     seed = seed * 10 + nextDigit;
@@ -93,7 +93,9 @@ public class MainMenu {
     private void updateGetSeedScreen(long seed) {
         StdDraw.clear(StdDraw.BLACK);
         StdDraw.text(centerX, centerY, "Please input a random seed:");
-        StdDraw.text(centerX, centerY - OFFSET, Long.toString(seed));
+        if (seed != 0) {
+            StdDraw.text(centerX, centerY - OFFSET, Long.toString(seed));
+        }
         StdDraw.show();
     }
 }

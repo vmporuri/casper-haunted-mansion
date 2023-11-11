@@ -8,9 +8,9 @@ public class Map {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;
-    private static final int AVATAR_ID = -3;
-    private static final int NOTHING_ID = -2;
     private static final int WALL_ID = -1;
+    private static final int NOTHING_ID = -2;
+    private static final int AVATAR_ID = -3;
     private TETile[][] world;
     private int[][] gameState;
 
