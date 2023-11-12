@@ -31,14 +31,19 @@ public class World {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
                 moveAvatar(nextChar);
-                ter.renderFrame(map.getWorld());
-                hud.updateHUD("test");
+                renderFrameWithHUD();
             }
         }
     }
 
     /** Plays the game from a string. */
     public void playGameFromString() {}
+
+    /** Re-renders the world and re-displays the HUD. */
+    private void renderFrameWithHUD() {
+        ter.renderFrame(map.getWorld());
+        hud.redrawHUD();
+    }
 
     /** Move avatar on the map. */
     private void moveAvatar(char moveChar) {

@@ -17,9 +17,14 @@ public class HUD {
         updateHUD("test");
     }
 
+    /** Redraws the HUD. */
+    public void redrawHUD() {
+        StdDraw.text(2, 41, currentHUD);
+        StdDraw.show();
+    }
+
     /** Updates the HUD. */
     public void updateHUD(String tileInfo) {
-        StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.text(2, 41, tileInfo);
         StdDraw.show();
     }
