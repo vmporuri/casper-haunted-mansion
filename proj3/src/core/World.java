@@ -31,10 +31,9 @@ public class World {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
                 moveAvatar(nextChar);
-                ter.renderFrame(map.getWorld());
                 renderFrameWithHUD();
             }
-//            updateHUDIfNewTile();
+            updateHUDIfNewTile();
         }
     }
 
@@ -67,8 +66,8 @@ public class World {
 
     /** Gets the location of the mouse. */
     private Coordinate getMouseLocation() {
-        int x = (int) Math.round(StdDraw.mouseX());
-        int y = (int) Math.round(StdDraw.mouseY());
+        int x = (int) Math.floor(StdDraw.mouseX());
+        int y = (int) Math.floor(StdDraw.mouseY());
         return new Coordinate(x, y);
     }
 
