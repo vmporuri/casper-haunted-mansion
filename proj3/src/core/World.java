@@ -16,8 +16,8 @@ public class World {
         this.ter = ter;
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
-        ter.renderFrame(map.getWorld());
         hud = new HUD(ter);
+        renderFrameWithHUD();
     }
 
     /** Returns the world of tiles. */
@@ -31,8 +31,10 @@ public class World {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
                 moveAvatar(nextChar);
+                ter.renderFrame(map.getWorld());
                 renderFrameWithHUD();
             }
+//            updateHUDIfNewTile();
         }
     }
 
@@ -60,6 +62,31 @@ public class World {
         if (!map.isWall(newLocation)) {
             map.placePlayer(newLocation);
             map.placeFloor(oldLocation);
+        }
+    }
+
+    /** Gets the location of the mouse. */
+    private Coordinate getMouseLocation() {
+        int x = (int) Math.round(StdDraw.mouseX());
+        int y = (int) Math.round(StdDraw.mouseY());
+        return new Coordinate(x, y);
+    }
+
+    /** Gets the description of the tile at COORDS. */
+    private String getTileType(Coordinate coords) {
+        TETile tile = map.getTileAtLocation(coords);
+        return tile.description();
+    }
+
+    /** Updates the HUD only if the tile is different. */
+    private void updateHUDIfNewTile() {
+        Coordinate mouseLocation = getMouseLocation();
+        if (map.validatePosition(mouseLocation)) {
+            String tileDescription = getTileType(mouseLocation);
+            String newHUDDescription = "Tile: " + tileDescription;
+            if (!newHUDDescription.equals(hud.getCurrentHUDString())) {
+                hud.updateHUD(newHUDDescription);
+            }
         }
     }
 }

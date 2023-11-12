@@ -3,8 +3,6 @@ package core;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 
-import java.awt.*;
-
 /** The HUD. */
 public class HUD {
 
@@ -25,7 +23,13 @@ public class HUD {
 
     /** Updates the HUD. */
     public void updateHUD(String tileInfo) {
+        currentHUD = tileInfo;
         StdDraw.text(2, 41, tileInfo);
         StdDraw.show();
+    }
+
+    /** Returns the string currently displayed on the HUD. */
+    public String getCurrentHUDString() {
+        return currentHUD;
     }
 }

@@ -53,6 +53,11 @@ public class Map {
         return 0 <= x && x < WORLD_LENGTH && 0 <= y && y < WORLD_HEIGHT;
     }
 
+    /** Checks if a set of coordinates is inside the world. */
+    public boolean validatePosition(Coordinate coords) {
+        return validatePosition(coords.getX(), coords.getY());
+    }
+
     /** Checks if a position is empty. */
     public boolean checkEmpty(int x, int y) {
         return world[x][y] != Tileset.NOTHING;
@@ -137,5 +142,15 @@ public class Map {
     /** Gets the player's location. */
     public Coordinate getPlayerLocation() {
         return playerLocation;
+    }
+
+    /** Returns the tile at a provided location. */
+    public TETile getTileAtLocation(int x, int y) {
+        return world[x][y];
+    }
+
+    /** Returns the tile at COORDS. */
+    public TETile getTileAtLocation(Coordinate coords) {
+        return getTileAtLocation(coords.getX(), coords.getY());
     }
 }
