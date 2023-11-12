@@ -85,6 +85,7 @@ public class World {
             String newHUDDescription = "Tile: " + tileDescription;
             if (!newHUDDescription.equals(hud.getCurrentHUDString())) {
                 hud.updateHUD(newHUDDescription);
+                renderFrameWithHUD();
             }
         }
     }
