@@ -29,7 +29,7 @@ public class World {
     public void playGame() {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
-                char nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
+                char nextChar = StdDraw.nextKeyTyped();
                 moveAvatar(nextChar);
                 renderFrameWithHUD();
             }
@@ -59,8 +59,8 @@ public class World {
         Coordinate oldLocation = map.getPlayerLocation();
         Coordinate newLocation = oldLocation.plus(movement);
         if (!map.isWall(newLocation)) {
-            map.placePlayer(newLocation);
             map.placeFloor(oldLocation);
+            map.placePlayer(newLocation);
         }
     }
 
