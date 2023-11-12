@@ -83,7 +83,7 @@ public class Map {
 
     /** Returns true if the location is a wall. */
     public boolean isWall(int x, int y) {
-        return gameState[x][y] == WALL_ID;
+        return world[x][y] == Tileset.WALL;
     }
 
     /** Returns true if the Coordinate is a wall. */
