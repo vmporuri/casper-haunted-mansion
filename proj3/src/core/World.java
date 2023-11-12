@@ -4,6 +4,8 @@ import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
 
+import java.util.Set;
+
 /** The game. */
 public class World {
 
@@ -30,7 +32,14 @@ public class World {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = StdDraw.nextKeyTyped();
-                moveAvatar(nextChar);
+                switch (nextChar) {
+                    case 'w', 'W' -> moveAvatar(new Coordinate(0, 1));
+                    case 'a', 'A' -> moveAvatar(new Coordinate(-1, 0));
+                    case 's', 'S' -> moveAvatar(new Coordinate(0, -1));
+                    case 'd', 'D' -> moveAvatar(new Coordinate(1, 0));
+                    case ':' -> quitIfQ();
+                    default -> {}
+                }
                 renderFrameWithHUD();
             }
             updateHUDIfNewTile();
@@ -47,15 +56,7 @@ public class World {
     }
 
     /** Move avatar on the map. */
-    private void moveAvatar(char moveChar) {
-        Coordinate movement;
-        switch (moveChar) {
-            case 'w' -> movement = new Coordinate(0, 1);
-            case 'a' -> movement = new Coordinate(-1, 0);
-            case 's' -> movement = new Coordinate(0, -1);
-            case 'd' -> movement = new Coordinate(1, 0);
-            default -> movement = new Coordinate(0, 0);
-        }
+    private void moveAvatar(Coordinate movement) {
         Coordinate oldLocation = map.getPlayerLocation();
         Coordinate newLocation = oldLocation.plus(movement);
         if (!map.isWall(newLocation)) {
@@ -88,5 +89,24 @@ public class World {
                 renderFrameWithHUD();
             }
         }
+    }
+
+    /** Quits and saves the game if the next key pressed is q/Q. */
+    private void quitIfQ() {
+        while (true) {
+            if (StdDraw.hasNextKeyTyped()) {
+                char nextChar = StdDraw.nextKeyTyped();
+                if (Set.of('q', 'Q').contains(nextChar)) {
+                    saveAndQuit();
+                }
+                return;
+            }
+        }
+    }
+
+    /** Saves and quits the game. */
+    private void saveAndQuit() {
+        SaveLoadWorld.saveWorld(map);
+        System.exit(0);
     }
 }
