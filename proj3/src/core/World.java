@@ -23,6 +23,14 @@ public class World {
         renderFrameWithHUD();
     }
 
+    /** Loads the world from an existing map. */
+    public World(Map map, TERenderer ter) {
+        this.ter = ter;
+        this.map = map;
+        hud = new HUD(ter);
+        renderFrameWithHUD();
+    }
+
     /** Returns the world of tiles. */
     public TETile[][] getWorld() {
         return map.getWorld();

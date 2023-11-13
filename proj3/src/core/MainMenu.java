@@ -3,7 +3,7 @@ package core;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 
-import java.awt.*;
+import java.awt.Font;
 import java.util.Set;
 
 /** The main menu. */
@@ -44,7 +44,7 @@ public class MainMenu {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
-                if (Set.of('n', 'l', 's').contains(nextChar)) {
+                if (Set.of('n', 'l', 's', 'q').contains(nextChar)) {
                     break;
                 }
             }
@@ -55,11 +55,15 @@ public class MainMenu {
     /** Handles the key input. */
     private World handleKeyInput(char nextChar) {
         switch (nextChar) {
-            case 'n' -> {
+            case 'n', 'N' -> {
                 return createNewWorld();
             }
-            // case 'l' -> loadGameFromSave();
-            // case 'q' -> quitGame();
+            case 'l', 'L' -> {
+                return loadGameFromSave();
+            }
+            case 'q', 'Q' -> {
+                return quitGame();
+            }
             default -> {
                 return processPlayerWorldSelection();
             }
@@ -105,5 +109,21 @@ public class MainMenu {
         StdDraw.text(CENTER_X, CENTER_Y + OFFSET, "Please input a random seed:");
         StdDraw.text(CENTER_X, CENTER_Y - OFFSET, seed.toString());
         StdDraw.show();
+    }
+
+    /** Loads the game from a previously saved text file. If a save doesn't exist, closes the program. */
+    private World loadGameFromSave() {
+        Map map = SaveLoadWorld.loadWorld();
+        if (map == null) {
+            System.exit(0);
+        }
+        StdDraw.setFont();
+        return new World(map, ter);
+    }
+
+    /** Quits the program. */
+    private World quitGame() {
+        System.exit(0);
+        return null;
     }
 }
