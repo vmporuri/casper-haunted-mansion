@@ -3,8 +3,10 @@ package core;
 import tileengine.TETile;
 import tileengine.Tileset;
 
+import java.io.Serializable;
+
 /** Contains the world map and the game state for persistence. */
-public class Map {
+public class Map implements Serializable {
 
     private static final int WORLD_LENGTH = 80;
     private static final int WORLD_HEIGHT = 40;

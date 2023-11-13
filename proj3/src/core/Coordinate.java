@@ -1,7 +1,9 @@
 package core;
 
+import java.io.Serializable;
+
 /** Stores an x and y coordinate pair. */
-public class Coordinate {
+public class Coordinate implements Serializable {
 
     int x;
     int y;
