@@ -44,7 +44,7 @@ public class MainMenu {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 nextChar = Character.toLowerCase(StdDraw.nextKeyTyped());
-                if (Set.of('n', 'l', 's', 'q').contains(nextChar)) {
+                if (Set.of('n', 'l', 'q', 'N', 'L', 'Q').contains(nextChar)) {
                     break;
                 }
             }
