@@ -9,6 +9,7 @@ import java.util.Set;
 /** The game. */
 public class World {
 
+    private static final int OFFSET = 2;
     private final TERenderer ter;
     private final Map map;
     private final HUD hud;
@@ -67,8 +68,8 @@ public class World {
 
     /** Gets the location of the mouse. */
     private Coordinate getMouseLocation() {
-        int x = (int) Math.floor(StdDraw.mouseX());
-        int y = (int) Math.floor(StdDraw.mouseY());
+        int x = (int) Math.floor(StdDraw.mouseX()) - OFFSET;
+        int y = (int) Math.floor(StdDraw.mouseY()) - OFFSET;
         return new Coordinate(x, y);
     }
 

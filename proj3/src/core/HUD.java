@@ -6,13 +6,15 @@ import tileengine.TERenderer;
 /** The HUD. */
 public class HUD {
 
+    private static final int HUD_X = 4;
+    private static final int HUD_Y = 43;
     private final TERenderer ter;
     private String currentHUD;
 
     /** Creates the HUD. */
     public HUD(TERenderer ter) {
         this.ter = ter;
-        updateHUD("test");
+        updateHUD("");
     }
 
     /** Redraws the HUD. */

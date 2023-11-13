@@ -2,7 +2,6 @@ package core;
 
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
-import tileengine.TETile;
 
 import java.awt.*;
 import java.util.Set;
@@ -12,7 +11,7 @@ public class MainMenu {
 
     private static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 60);
     private static final Font OPTION_FONT = new Font("SansSerif", Font.BOLD, 30);
-    private static final int WINDOW_LENGTH = 80;
+    private static final int WINDOW_LENGTH = 84;
     private static final int WINDOW_HEIGHT = 42;
     private static final double CENTER_X = WINDOW_LENGTH / 2.;
     private static final double CENTER_Y = WINDOW_HEIGHT / 2.;
@@ -24,17 +23,11 @@ public class MainMenu {
     /** A main menu instance. */
     public MainMenu(TERenderer ter) {
         this.ter = ter;
-        ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT);
+        ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT, OFFSET, OFFSET);
     }
 
-    /** Opens the main menu. */
+    /** Creates and opens the main menu. */
     public void openMainMenu() {
-        createMainMenu();
-        getPlayerInput();
-    }
-
-    /** Creates the main menu. */
-    private void createMainMenu() {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.setFont(TITLE_FONT);
         StdDraw.text(CENTER_X, TITLE_Y, "CS61B: THE GAME");
@@ -46,7 +39,7 @@ public class MainMenu {
     }
 
     /** Listens for keyboard input. */
-    private void getPlayerInput() {
+    public World processPlayerWorldSelection() {
         char nextChar;
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
@@ -56,25 +49,28 @@ public class MainMenu {
                 }
             }
         }
-        handleKeyInput(nextChar);
+        return handleKeyInput(nextChar);
     }
 
     /** Handles the key input. */
-    private void handleKeyInput(char nextChar) {
+    private World handleKeyInput(char nextChar) {
         switch (nextChar) {
-            case 'n' -> createNewWorld();
+            case 'n' -> {
+                return createNewWorld();
+            }
             // case 'l' -> loadGameFromSave();
             // case 'q' -> quitGame();
-            default -> getPlayerInput();
+            default -> {
+                return processPlayerWorldSelection();
+            }
         }
     }
 
     /** Creates a new world from a seed inputted by the player. */
-    private void createNewWorld() {
+    private World createNewWorld() {
         long seed = getSeed();
         StdDraw.setFont();
-        World world = new World(seed, ter);
-        world.playGame();
+        return new World(seed, ter);
     }
 
     /** Gets the seed from player input until 's' is pressed. */

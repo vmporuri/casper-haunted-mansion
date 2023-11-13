@@ -7,5 +7,7 @@ public class Main {
         TERenderer ter = new TERenderer();
         MainMenu mm = new MainMenu(ter);
         mm.openMainMenu();
+        World world = mm.processPlayerWorldSelection();
+        world.playGame();
     }
 }
