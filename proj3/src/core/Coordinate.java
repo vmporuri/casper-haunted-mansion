@@ -58,4 +58,11 @@ public class Coordinate implements Serializable {
         }
         return false;
     }
+
+    /** Computes the distance between THIS and OTHER. */
+    public double distance(Coordinate other) {
+        double differenceX = x - other.getX();
+        double differenceY = y - other.getY();
+        return Math.sqrt(Math.pow(differenceX, 2) + Math.pow(differenceY, 2));
+    }
 }
