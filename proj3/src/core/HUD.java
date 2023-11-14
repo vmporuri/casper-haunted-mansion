@@ -8,6 +8,7 @@ import java.io.Serializable;
 /** The HUD. */
 public class HUD implements Serializable {
 
+    private static final int OFFSET = 2;
     private static final int HUD_X = 4;
     private static final int HUD_Y = 43;
     private final TERenderer ter;
@@ -22,7 +23,7 @@ public class HUD implements Serializable {
     /** Redraws the HUD. */
     public void redrawHUD() {
         StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.text(4, 41, currentHUD);
+        StdDraw.text(HUD_X, HUD_Y - OFFSET, currentHUD);
         StdDraw.show();
     }
 
@@ -30,7 +31,7 @@ public class HUD implements Serializable {
     public void updateHUD(String tileInfo) {
         currentHUD = tileInfo;
         StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.text(4, 41, tileInfo);
+        StdDraw.text(HUD_X, HUD_Y - OFFSET, tileInfo);
         StdDraw.show();
     }
 
