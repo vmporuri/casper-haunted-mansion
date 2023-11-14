@@ -92,8 +92,11 @@ public class World {
     /** Re-renders the world and re-displays the HUD. */
     private void renderFrameWithHUD() {
         if (shouldRender()) {
-//            ter.renderFrame(map.getWorld());
-            Lights.renderDarkness(map, ter);
+            if (lightsOn) {
+                ter.renderFrame(map.getWorld());
+            } else {
+                LightUtils.renderDarkness(map, ter);
+            }
             hud.redrawHUD();
         }
     }

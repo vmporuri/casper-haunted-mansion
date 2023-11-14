@@ -5,7 +5,7 @@ import tileengine.TETile;
 import tileengine.Tileset;
 
 /** Renders light/darkness around the avatar. */
-public class Lights {
+public class LightUtils {
 
     private static final double LIGHT_RADIUS = 4;
 
@@ -35,10 +35,5 @@ public class Lights {
             }
         }
         return copyWithDarkness;
-    }
-
-    /** Renders the world with the lights turned on. */
-    public static void renderWithLight() {
-
     }
 }
