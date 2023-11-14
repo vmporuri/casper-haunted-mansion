@@ -16,33 +16,34 @@ public class World {
     private final InputDevice input;
 
     /** Creates the world. */
-    public World(long seed, TERenderer ter) {
-        this.ter = ter;
+    public World(long seed) {
+//        this.ter = ter;
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
         hud = new HUD(ter);
         input = new InputDevice();
-        renderFrameWithHUD();
+//        renderFrameWithHUD();
     }
 
     /** Loads the world from an existing map. */
-    public World(Map map, TERenderer ter) {
-        this.ter = ter;
+    public World(Map map) {
+//        this.ter = ter;
         this.map = map;
         hud = new HUD(ter);
         input = new InputDevice();
-        renderFrameWithHUD();
-    }
-
-    /** Constructs a world from an INPUTSTRING. */
-    public World(String inputString) {
-        input = new InputDevice(inputString);
+//        renderFrameWithHUD();
     }
 
     /** Constructs a world from a string and an existing MAP. */
     public World(Map map, InputDevice input) {
         this.map = map;
         this.input = input;
+    }
+
+    /** Renders the world for the first time. */
+    public void renderWorld(TERenderer ter) {
+        this.ter = ter;
+        renderFrameWithHUD();
     }
 
 
@@ -137,7 +138,7 @@ public class World {
         if (!shouldRender()) {
             char nextChar = input.nextChar();
             if (Set.of('q', 'Q').contains(nextChar)) {
-                SaveLoadWorld.saveWorld(map);
+                WorldUtils.saveWorld(map);
             }
             return;
         }
@@ -154,7 +155,7 @@ public class World {
 
     /** Saves and quits the game. */
     private void saveAndQuit() {
-        SaveLoadWorld.saveWorld(map);
+        WorldUtils.saveWorld(map);
         System.exit(0);
     }
 }

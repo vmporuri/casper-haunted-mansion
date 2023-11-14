@@ -74,7 +74,7 @@ public class MainMenu {
     private World createNewWorld() {
         long seed = getSeed();
         StdDraw.setFont();
-        return new World(seed, ter);
+        return new World(seed);
     }
 
     /** Gets the seed from player input until 's' is pressed. */
@@ -113,12 +113,12 @@ public class MainMenu {
 
     /** Loads the game from a previously saved text file. If a save doesn't exist, closes the program. */
     private World loadGameFromSave() {
-        Map map = SaveLoadWorld.loadWorld();
+        Map map = WorldUtils.loadWorld();
         if (map == null) {
             System.exit(0);
         }
         StdDraw.setFont();
-        return new World(map, ter);
+        return new World(map);
     }
 
     /** Quits the program. */
