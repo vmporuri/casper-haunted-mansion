@@ -7,6 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /** Various utilities for creating, saving, and loading worlds. */
@@ -14,14 +16,17 @@ public class WorldUtils {
 
     private static final String SAVE_FILE_NAME = "save_file.txt";
 
-    /** Saves the world to save_file.txt */
-    public static void saveWorld(Map map) {
-        // @source Usage of Serializable interface from
-        // https://www.simplilearn.com/tutorials/java-tutorial/serialization-in-java
+    /** Saves the world to save_file.txt
+     * @source Usage of Serializable interface from
+     * https://www.simplilearn.com/tutorials/java-tutorial/serialization-in-java
+     * @source Using a List<Object> to serialize multiple objects from
+     * https://stackoverflow.com/a/30022340
+     */
+    public static void saveWorld(World world) {
         try {
             FileOutputStream fileOut = new FileOutputStream(SAVE_FILE_NAME);
             ObjectOutputStream output = new ObjectOutputStream(fileOut);
-            output.writeObject(map);
+            output.writeObject(world);
             output.close();
             fileOut.close();
         } catch (IOException e) {
@@ -29,17 +34,22 @@ public class WorldUtils {
         }
     }
 
-    /** Loads the world from save_file.txt if it exists. */
-    public static Map loadWorld() {
+    /** Loads the world from save_file.txt if it exists.
+     * @source Usage of Serializable interface from
+     * https://www.simplilearn.com/tutorials/java-tutorial/serialization-in-java
+     * @source Using a List<Object> to serialize multiple objects from
+     * https://stackoverflow.com/a/30022340
+     */
+    public static World loadWorld() {
         // @source Usage of Serializable interface from
         // https://www.simplilearn.com/tutorials/java-tutorial/serialization-in-java
         try {
             FileInputStream fileIn = new FileInputStream(SAVE_FILE_NAME);
             ObjectInputStream inputStream = new ObjectInputStream(fileIn);
-            Map map = (Map) inputStream.readObject();
+            World world = (World) inputStream.readObject();
             inputStream.close();
             fileIn.close();
-            return map;
+            return world;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading save file.");
             return null;
@@ -55,11 +65,11 @@ public class WorldUtils {
                 return new World(seed, input);
             }
             case 'l', 'L' -> {
-                Map map = loadWorld();
-                if (map == null) {
+                World world = loadWorld();
+                if (world == null) {
                     System.exit(0);
                 }
-                return new World(map, input);
+                return world;
             }
             default -> {
                 return null;

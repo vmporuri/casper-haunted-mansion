@@ -4,13 +4,16 @@ import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
 
+import java.io.Serializable;
+import java.util.Random;
 import java.util.Set;
 
 /** The primary game engine. */
-public class World {
+public class World implements Serializable {
 
     private static final int OFFSET = 2;
     private final Map map;
+    private final Random random;
     private final InputDevice input;
     private TERenderer ter;
     private HUD hud;
@@ -19,14 +22,8 @@ public class World {
     /** Constructs a world from an InputDevice and an existing MAP. */
     public World(long seed, InputDevice input) {
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
+        random = rwg.getRNG();
         map = rwg.getMap();
-        this.input = input;
-        lightsOn = false;
-    }
-
-    /** Constructs a world from a string and an existing MAP. */
-    public World(Map map, InputDevice input) {
-        this.map = map;
         this.input = input;
         lightsOn = false;
     }
@@ -34,11 +31,6 @@ public class World {
     /** Creates the world. */
     public World(long seed) {
         this(seed, new InputDevice());
-    }
-
-    /** Loads the world from an existing map. */
-    public World(Map map) {
-        this(map, new InputDevice());
     }
 
     /** Renders the world for the first time. */
@@ -85,7 +77,8 @@ public class World {
             case 'd', 'D' -> moveAvatar(new Coordinate(1, 0));
             case 't', 'T' -> toggleLights();
             case ':' -> quitIfQ();
-            default -> {}
+            default -> {
+            }
         }
     }
 
@@ -145,7 +138,7 @@ public class World {
         if (!shouldRender()) {
             char nextChar = input.nextChar();
             if (Set.of('q', 'Q').contains(nextChar)) {
-                WorldUtils.saveWorld(map);
+                WorldUtils.saveWorld(this);
             }
             return;
         }
@@ -162,7 +155,7 @@ public class World {
 
     /** Saves and quits the game. */
     private void saveAndQuit() {
-        WorldUtils.saveWorld(map);
+        WorldUtils.saveWorld(this);
         System.exit(0);
     }
 

@@ -1,10 +1,11 @@
 package core;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 
 /** Handles input from keyboards and hard-coded strings. */
 // @source Inspired by Prof Hug's SWE II video
-public class InputDevice {
+public class InputDevice implements Serializable {
 
     ArrayDeque<Character> characterQueue;
 

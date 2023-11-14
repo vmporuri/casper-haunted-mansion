@@ -71,4 +71,9 @@ public class RandomWorldGenerator {
         Coordinate center = firstRoom.getRoomCenter();
         map.placePlayer(center.getX(), center.getY());
     }
+
+    /** Returns the random number generator used to create the world. */
+    public Random getRNG() {
+        return random;
+    }
 }

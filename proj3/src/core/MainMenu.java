@@ -113,12 +113,12 @@ public class MainMenu {
 
     /** Loads the game from a previously saved text file. If a save doesn't exist, closes the program. */
     private World loadGameFromSave() {
-        Map map = WorldUtils.loadWorld();
-        if (map == null) {
+        World world = WorldUtils.loadWorld();
+        if (world == null) {
             System.exit(0);
         }
         StdDraw.setFont();
-        return new World(map);
+        return world;
     }
 
     /** Quits the program. */

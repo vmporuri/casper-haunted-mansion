@@ -3,8 +3,10 @@ package core;
 import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 
+import java.io.Serializable;
+
 /** The HUD. */
-public class HUD {
+public class HUD implements Serializable {
 
     private static final int HUD_X = 4;
     private static final int HUD_Y = 43;
