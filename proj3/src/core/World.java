@@ -134,6 +134,13 @@ public class World {
 
     /** Quits and saves the game if the next key pressed is q/Q. */
     private void quitIfQ() {
+        if (!shouldRender()) {
+            char nextChar = input.nextChar();
+            if (Set.of('q', 'Q').contains(nextChar)) {
+                SaveLoadWorld.saveWorld(map);
+            }
+            return;
+        }
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
                 char nextChar = StdDraw.nextKeyTyped();

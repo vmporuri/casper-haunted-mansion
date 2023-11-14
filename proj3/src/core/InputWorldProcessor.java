@@ -21,7 +21,9 @@ public class InputWorldProcessor {
                 if (map == null) {
                     System.exit(0);
                 }
-                StdDraw.setFont();
+                if (ter != null) {
+                    StdDraw.setFont();
+                }
                 return new World(map, input);
             }
             default -> {
