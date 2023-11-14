@@ -18,18 +18,9 @@ public class AutograderBuddy {
      * @return the 2D TETile[][] representing the state of the world
      */
     public static TETile[][] getWorldFromInput(String input) {
-        RandomWorldGenerator randomWorldGenerator = new RandomWorldGenerator(getSeed(input));
-        return randomWorldGenerator.getWorld();
-    }
-
-    /** Retrieves the seed from an input string. */
-    private static long getSeed(String inputString) {
-        if (inputString.toUpperCase().charAt(0) == 'N'
-                && inputString.toUpperCase().charAt(inputString.length() - 1) == 'S') {
-            String seedString = inputString.substring(1, inputString.length() - 2);
-            return Long.parseLong(seedString); // {@source https://stackoverflow.com/a/7693344}
-        }
-        return 0;
+        InputDevice inputDevice = new InputDevice(input);
+        World world = InputWorldProcessor.getWorldFromString(inputDevice, null);
+        return world.getWorld();
     }
 
     /**

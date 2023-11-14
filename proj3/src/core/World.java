@@ -10,9 +10,10 @@ import java.util.Set;
 public class World {
 
     private static final int OFFSET = 2;
-    private final TERenderer ter;
-    private final Map map;
-    private final HUD hud;
+    private TERenderer ter;
+    private Map map;
+    private HUD hud;
+    private final InputDevice input;
 
     /** Creates the world. */
     public World(long seed, TERenderer ter) {
@@ -20,6 +21,7 @@ public class World {
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
         hud = new HUD(ter);
+        input = new InputDevice();
         renderFrameWithHUD();
     }
 
@@ -28,7 +30,25 @@ public class World {
         this.ter = ter;
         this.map = map;
         hud = new HUD(ter);
+        input = new InputDevice();
         renderFrameWithHUD();
+    }
+
+    /** Constructs a world from an INPUTSTRING. */
+    public World(String inputString) {
+        input = new InputDevice(inputString);
+    }
+
+    /** Constructs a world from a string and an existing MAP. */
+    public World(Map map, String inputString) {
+        this.map = map;
+        input = new InputDevice(inputString);
+    }
+
+
+    /** Returns whether StdDraw functions should be executed. */
+    private boolean shouldRender() {
+        return ter != null;
     }
 
     /** Returns the world of tiles. */
@@ -40,28 +60,35 @@ public class World {
     public void playGame() {
         while (true) {
             if (StdDraw.hasNextKeyTyped()) {
-                char nextChar = StdDraw.nextKeyTyped();
-                switch (nextChar) {
-                    case 'w', 'W' -> moveAvatar(new Coordinate(0, 1));
-                    case 'a', 'A' -> moveAvatar(new Coordinate(-1, 0));
-                    case 's', 'S' -> moveAvatar(new Coordinate(0, -1));
-                    case 'd', 'D' -> moveAvatar(new Coordinate(1, 0));
-                    case ':' -> quitIfQ();
-                    default -> {}
-                }
+                input.addChar(StdDraw.nextKeyTyped());
+            } else if (!input.isEmpty()) {
+                characterDispatch();
                 renderFrameWithHUD();
             }
             updateHUDIfNewTile();
         }
     }
 
-    /** Plays the game from a string. */
-    public void playGameFromString() {}
+    /** Selects what to do based on what the inputted character is. */
+    private void characterDispatch() {
+        char nextChar = input.nextChar();
+        switch (nextChar) {
+            case 'w', 'W' -> moveAvatar(new Coordinate(0, 1));
+            case 'a', 'A' -> moveAvatar(new Coordinate(-1, 0));
+            case 's', 'S' -> moveAvatar(new Coordinate(0, -1));
+            case 'd', 'D' -> moveAvatar(new Coordinate(1, 0));
+            case ':' -> quitIfQ();
+            default -> {
+            }
+        }
+    }
 
     /** Re-renders the world and re-displays the HUD. */
     private void renderFrameWithHUD() {
-        ter.renderFrame(map.getWorld());
-        hud.redrawHUD();
+        if (shouldRender()) {
+            ter.renderFrame(map.getWorld());
+            hud.redrawHUD();
+        }
     }
 
     /** Move avatar on the map. */
@@ -89,6 +116,9 @@ public class World {
 
     /** Updates the HUD only if the tile is different. */
     private void updateHUDIfNewTile() {
+        if (!shouldRender()) {
+            return;
+        }
         Coordinate mouseLocation = getMouseLocation();
         if (map.validatePosition(mouseLocation)) {
             String tileDescription = getTileType(mouseLocation);

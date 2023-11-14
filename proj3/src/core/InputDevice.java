@@ -35,4 +35,9 @@ public class InputDevice {
             characterQueue.addLast(inputString.charAt(i));
         }
     }
+
+    /** Returns whether the InputDevice is empty. */
+    public boolean isEmpty() {
+        return characterQueue.isEmpty();
+    }
 }
