@@ -85,7 +85,7 @@ public class Map implements Serializable {
 
     /** Returns true if the location is a wall. */
     public boolean isWall(int x, int y) {
-        return world[x][y] == Tileset.WALL;
+        return world[x][y].character() == '#';
     }
 
     /** Returns true if the Coordinate is a wall. */
