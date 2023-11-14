@@ -39,9 +39,9 @@ public class World {
     }
 
     /** Renders the world for the first time. */
-    public void renderWorld(TERenderer ter) {
-        this.ter = ter;
-        hud = new HUD(ter);
+    public void renderWorld(TERenderer renderer) {
+        this.ter = renderer;
+        hud = new HUD(renderer);
         StdDraw.setFont();
         renderFrameWithHUD();
     }
