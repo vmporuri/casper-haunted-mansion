@@ -1,8 +1,5 @@
 package core;
 
-import tileengine.TETile;
-import utils.FileUtils;
-
 import java.io.*;
 
 /** Handles persistence. */

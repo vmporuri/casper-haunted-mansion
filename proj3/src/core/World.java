@@ -40,9 +40,9 @@ public class World {
     }
 
     /** Constructs a world from a string and an existing MAP. */
-    public World(Map map, String inputString) {
+    public World(Map map, InputDevice input) {
         this.map = map;
-        input = new InputDevice(inputString);
+        this.input = input;
     }
 
 
@@ -64,7 +64,7 @@ public class World {
             } else if (!input.isEmpty()) {
                 characterDispatch();
                 renderFrameWithHUD();
-            } else if (!shouldRender() & !input.isEmpty()) {
+            } else if (!shouldRender() & input.isEmpty()) {
                 return;
             }
             updateHUDIfNewTile();

@@ -14,7 +14,7 @@ public class InputWorldProcessor {
             case 'n', 'N' -> {
                 long seed = getSeedFromInputDevice(input);
                 RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
-                return new World(rwg.getMap(), ter);
+                return new World(rwg.getMap(), input);
             }
             case 'l', 'L' -> {
                 Map map = SaveLoadWorld.loadWorld();
@@ -22,7 +22,7 @@ public class InputWorldProcessor {
                     System.exit(0);
                 }
                 StdDraw.setFont();
-                return new World(map, ter);
+                return new World(map, input);
             }
             default -> {
                 return null;
