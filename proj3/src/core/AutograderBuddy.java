@@ -20,6 +20,7 @@ public class AutograderBuddy {
     public static TETile[][] getWorldFromInput(String input) {
         InputDevice inputDevice = new InputDevice(input);
         World world = InputWorldProcessor.getWorldFromString(inputDevice, null);
+        world.playGame();
         return world.getWorld();
     }
 

@@ -59,11 +59,13 @@ public class World {
     /** The game loop. */
     public void playGame() {
         while (true) {
-            if (StdDraw.hasNextKeyTyped()) {
+            if (shouldRender() && StdDraw.hasNextKeyTyped()) {
                 input.addChar(StdDraw.nextKeyTyped());
             } else if (!input.isEmpty()) {
                 characterDispatch();
                 renderFrameWithHUD();
+            } else if (!shouldRender() & !input.isEmpty()) {
+                return;
             }
             updateHUDIfNewTile();
         }
