@@ -6,32 +6,20 @@ import tileengine.TETile;
 
 import java.util.Set;
 
-/** The game. */
+/** The primary game engine. */
 public class World {
 
     private static final int OFFSET = 2;
-    private TERenderer ter;
-    private Map map;
-    private HUD hud;
+    private final Map map;
     private final InputDevice input;
+    private TERenderer ter;
+    private HUD hud;
 
-    /** Creates the world. */
-    public World(long seed) {
-//        this.ter = ter;
+    /** Constructs a world from an InputDevice and an existing MAP. */
+    public World(long seed, InputDevice input) {
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
-        hud = new HUD(ter);
-        input = new InputDevice();
-//        renderFrameWithHUD();
-    }
-
-    /** Loads the world from an existing map. */
-    public World(Map map) {
-//        this.ter = ter;
-        this.map = map;
-        hud = new HUD(ter);
-        input = new InputDevice();
-//        renderFrameWithHUD();
+        this.input = input;
     }
 
     /** Constructs a world from a string and an existing MAP. */
@@ -40,9 +28,21 @@ public class World {
         this.input = input;
     }
 
+    /** Creates the world. */
+    public World(long seed) {
+        this(seed, new InputDevice());
+    }
+
+    /** Loads the world from an existing map. */
+    public World(Map map) {
+        this(map, new InputDevice());
+    }
+
     /** Renders the world for the first time. */
     public void renderWorld(TERenderer ter) {
         this.ter = ter;
+        hud = new HUD(ter);
+        StdDraw.setFont();
         renderFrameWithHUD();
     }
 

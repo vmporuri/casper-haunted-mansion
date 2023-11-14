@@ -53,16 +53,12 @@ public class WorldUtils {
         switch (nextChar) {
             case 'n', 'N' -> {
                 long seed = getSeedFromInputDevice(input);
-                RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
-                return new World(rwg.getMap(), input);
+                return new World(seed, input);
             }
             case 'l', 'L' -> {
                 Map map = loadWorld();
                 if (map == null) {
                     System.exit(0);
-                }
-                if (ter != null) {
-                    StdDraw.setFont();
                 }
                 return new World(map, input);
             }
