@@ -14,18 +14,21 @@ public class World {
     private final InputDevice input;
     private TERenderer ter;
     private HUD hud;
+    private boolean lightsOn;
 
     /** Constructs a world from an InputDevice and an existing MAP. */
     public World(long seed, InputDevice input) {
         RandomWorldGenerator rwg = new RandomWorldGenerator(seed);
         map = rwg.getMap();
         this.input = input;
+        lightsOn = false;
     }
 
     /** Constructs a world from a string and an existing MAP. */
     public World(Map map, InputDevice input) {
         this.map = map;
         this.input = input;
+        lightsOn = false;
     }
 
     /** Creates the world. */
@@ -80,16 +83,17 @@ public class World {
             case 'a', 'A' -> moveAvatar(new Coordinate(-1, 0));
             case 's', 'S' -> moveAvatar(new Coordinate(0, -1));
             case 'd', 'D' -> moveAvatar(new Coordinate(1, 0));
+            case 't', 'T' -> toggleLights();
             case ':' -> quitIfQ();
-            default -> {
-            }
+            default -> {}
         }
     }
 
     /** Re-renders the world and re-displays the HUD. */
     private void renderFrameWithHUD() {
         if (shouldRender()) {
-            ter.renderFrame(map.getWorld());
+//            ter.renderFrame(map.getWorld());
+            Lights.renderDarkness(map, ter);
             hud.redrawHUD();
         }
     }
@@ -157,5 +161,10 @@ public class World {
     private void saveAndQuit() {
         WorldUtils.saveWorld(map);
         System.exit(0);
+    }
+
+    /** Toggles the lights. */
+    private void toggleLights() {
+        lightsOn = !lightsOn;
     }
 }
