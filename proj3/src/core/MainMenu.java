@@ -9,15 +9,15 @@ import java.util.Set;
 /** The main menu. */
 public class MainMenu {
 
-    private static final Font TITLE_FONT = new Font("SansSerif", Font.BOLD, 60);
-    private static final Font OPTION_FONT = new Font("SansSerif", Font.BOLD, 30);
+    private static final Font TITLE_FONT = new Font("Chalkduster", Font.BOLD, 80);
+    private static final Font OPTION_FONT = new Font("Chalkduster", Font.BOLD, 40);
     private static final int WINDOW_LENGTH = 84;
     private static final int WINDOW_HEIGHT = 42;
     private static final double CENTER_X = WINDOW_LENGTH / 2.;
     private static final double CENTER_Y = WINDOW_HEIGHT / 2.;
     private static final double OPTION_Y = WINDOW_HEIGHT / 4.;
     private static final double TITLE_Y = 3. * WINDOW_HEIGHT / 4;
-    private static final int OFFSET = 2;
+    private static final int OFFSET = 3;
     private final TERenderer ter;
 
     /** A main menu instance. */
@@ -30,7 +30,7 @@ public class MainMenu {
     public void openMainMenu() {
         StdDraw.setPenColor(StdDraw.WHITE);
         StdDraw.setFont(TITLE_FONT);
-        StdDraw.text(CENTER_X, TITLE_Y, "CS61B: THE GAME");
+        StdDraw.text(CENTER_X, TITLE_Y, "Casper's Haunted Mansion");
         StdDraw.setFont(OPTION_FONT);
         StdDraw.text(CENTER_X, OPTION_Y + OFFSET, "New Game (N)");
         StdDraw.text(CENTER_X, OPTION_Y, "Load Game (L)");

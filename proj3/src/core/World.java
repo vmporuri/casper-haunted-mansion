@@ -4,6 +4,7 @@ import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
 
+import java.awt.Font;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class World implements Serializable {
     /** Renders the world for the first time. */
     public void renderWorld(TERenderer renderer) {
         this.ter = renderer;
-        hud = new HUD(renderer);
+        hud = new HUD();
         StdDraw.setFont();
         renderFrameWithHUD();
     }
