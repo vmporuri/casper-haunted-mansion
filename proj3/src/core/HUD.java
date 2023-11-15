@@ -21,17 +21,17 @@ public class HUD implements Serializable {
 
     /** Redraws the HUD. */
     public void redrawHUD() {
-        updateHUD(currentHUD);
+        StdDraw.setPenColor(StdDraw.WHITE);
+        StdDraw.setFont(HUD_FONT);
+        StdDraw.text(HUD_X, HUD_Y - OFFSET, currentHUD);
+        StdDraw.show();
+        StdDraw.setFont();
     }
 
     /** Updates the HUD. */
     public void updateHUD(String tileInfo) {
         currentHUD = tileInfo;
-        StdDraw.setPenColor(StdDraw.WHITE);
-        StdDraw.setFont(HUD_FONT);
-        StdDraw.text(HUD_X, HUD_Y - OFFSET, tileInfo);
-        StdDraw.show();
-        StdDraw.setFont();
+//        redrawHUD();
     }
 
     /** Returns the string currently displayed on the HUD. */

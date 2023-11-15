@@ -38,7 +38,7 @@ public class World implements Serializable {
         this.ter = renderer;
         hud = new HUD();
         StdDraw.setFont();
-        renderFrameWithHUD();
+        updateHUDIfNewTile();
     }
 
 
