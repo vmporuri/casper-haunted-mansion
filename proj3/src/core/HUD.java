@@ -31,7 +31,6 @@ public class HUD implements Serializable {
     /** Updates the HUD. */
     public void updateHUD(String tileInfo) {
         currentHUD = tileInfo;
-//        redrawHUD();
     }
 
     /** Returns the string currently displayed on the HUD. */
