@@ -1,7 +1,6 @@
 package core;
 
 import edu.princeton.cs.algs4.StdDraw;
-import tileengine.TERenderer;
 
 import java.awt.*;
 import java.io.Serializable;

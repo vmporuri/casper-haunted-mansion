@@ -4,7 +4,6 @@ import edu.princeton.cs.algs4.StdDraw;
 import tileengine.TERenderer;
 import tileengine.TETile;
 
-import java.awt.Font;
 import java.io.Serializable;
 import java.util.Random;
 import java.util.Set;
