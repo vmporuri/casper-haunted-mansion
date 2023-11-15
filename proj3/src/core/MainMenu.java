@@ -17,13 +17,12 @@ public class MainMenu {
     private static final double CENTER_Y = WINDOW_HEIGHT / 2.;
     private static final double OPTION_Y = WINDOW_HEIGHT / 4.;
     private static final double TITLE_Y = 3. * WINDOW_HEIGHT / 4;
-    private static final int OFFSET = 3;
-    private final TERenderer ter;
+    private static final int WINDOW_OFFSET = 2;
+    private static final int OPTION_OFFSET = 3;
 
     /** A main menu instance. */
     public MainMenu(TERenderer ter) {
-        this.ter = ter;
-        ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT, OFFSET, OFFSET);
+        ter.initialize(WINDOW_LENGTH, WINDOW_HEIGHT, WINDOW_OFFSET, WINDOW_OFFSET);
     }
 
     /** Creates and opens the main menu. */
@@ -32,9 +31,9 @@ public class MainMenu {
         StdDraw.setFont(TITLE_FONT);
         StdDraw.text(CENTER_X, TITLE_Y, "Casper's Haunted Mansion");
         StdDraw.setFont(OPTION_FONT);
-        StdDraw.text(CENTER_X, OPTION_Y + OFFSET, "New Game (N)");
+        StdDraw.text(CENTER_X, OPTION_Y + OPTION_OFFSET, "New Game (N)");
         StdDraw.text(CENTER_X, OPTION_Y, "Load Game (L)");
-        StdDraw.text(CENTER_X, OPTION_Y - OFFSET, "Quit (Q)");
+        StdDraw.text(CENTER_X, OPTION_Y - OPTION_OFFSET, "Quit (Q)");
         StdDraw.show();
     }
 
@@ -106,8 +105,8 @@ public class MainMenu {
     /** Updates the seed screen. */
     private void updateGetSeedScreen(StringBuilder seed) {
         StdDraw.clear(StdDraw.BLACK);
-        StdDraw.text(CENTER_X, CENTER_Y + OFFSET, "Please input a random seed:");
-        StdDraw.text(CENTER_X, CENTER_Y - OFFSET, seed.toString());
+        StdDraw.text(CENTER_X, CENTER_Y + WINDOW_OFFSET, "Please input a random seed:");
+        StdDraw.text(CENTER_X, CENTER_Y - WINDOW_OFFSET, seed.toString());
         StdDraw.show();
     }
 
