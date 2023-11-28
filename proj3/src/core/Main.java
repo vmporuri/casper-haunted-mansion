@@ -8,7 +8,7 @@ public class Main {
         MainMenu mm = new MainMenu(ter);
         mm.openMainMenu();
         World world = mm.processPlayerWorldSelection();
-        world.renderWorld(ter);
+        world.displayWorld(ter);
         world.playGame();
     }
 }

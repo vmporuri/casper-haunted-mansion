@@ -34,11 +34,11 @@ public class World implements Serializable {
     }
 
     /** Renders the world for the first time. */
-    public void renderWorld(TERenderer renderer) {
+    public void displayWorld(TERenderer renderer) {
         this.ter = renderer;
         hud = new HUD();
         StdDraw.setFont();
-        updateHUDIfNewTile();
+        renderFrameWithHUD();
     }
 
 
