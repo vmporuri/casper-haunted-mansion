@@ -25,7 +25,7 @@ public class World implements Serializable {
         random = rwg.getRNG();
         map = rwg.getMap();
         this.input = input;
-        lightsOn = false;
+        lightsOn = true;
     }
 
     /** Creates the world. */
